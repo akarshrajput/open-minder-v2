@@ -27,10 +27,10 @@ const blogSchema = new mongoose.Schema(
       minlength: [100, "Blog must have more than 100 characters."],
       maxlength: [20000, "Blog must have less than 20,000 characters."],
     },
-    // author: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "User",
-    // },
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -174,13 +174,13 @@ blogSchema.virtual("readTime").get(function () {
   return `${readTimeMinutes}`;
 });
 
-// blogSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: "author",
-//     select: "name username email",
-//   });
-//   next();
-// });
+blogSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "author",
+    select: "name username email verified",
+  });
+  next();
+});
 
 const Blog = mongoose.model("Blog", blogSchema);
 module.exports = Blog;

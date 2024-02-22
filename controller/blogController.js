@@ -46,7 +46,7 @@ exports.getBlog = async (req, res, next) => {
 };
 
 exports.createBlog = async (req, res, next) => {
-  //   if (!req.body.author) req.body.author = req.user.id;
+  if (!req.body.author) req.body.author = req.user.id;
   try {
     const newBlog = await Blog.create(req.body);
     res.status(201).json({

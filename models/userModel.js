@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const validator = require("validator");
+const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -85,8 +87,59 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next(); // Only run this function if the password is modified.
+  // Hash password with code of 12 (default is 10)
+  this.password = await bcrypt.hash(this.password, 12);
+  // Delete password confirm
+  this.passwordConfirm = undefined;
+  next();
+});
+
+// To create "passowrdChangedAt" field when password is changed
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// Query middleware to find only that users whose active field is not equal to false
+userSchema.pre(/^find/, function (next) {
+  // this points to the current query
+  this.find({ active: { $ne: false } });
+  next();
+});
+
 userSchema.methods.correctPassword = async function (candidatePassword) {
-  return (await candidatePassword) === this.password;
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  // False means password not changed
+  return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  // resetToken -> Random Token , passwordResetTokern -> Encrypted version of Random Token(which is saved to database)
+  // console.log(resetToken, this.passwordResetToken);
+
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // Expires in 10 minutes
+
+  return resetToken; // We will use unencrypted token for email and store encrypted token in database
 };
 
 const User = mongoose.model("User", userSchema);
