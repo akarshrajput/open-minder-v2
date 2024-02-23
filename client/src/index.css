@@ -1,0 +1,26 @@
+/* 
+Font Families :
+1) font-family: "Rubik", sans-serif;
+2) font-family: "Ubuntu", sans-serif;
+3) font-family: "Roboto", sans-serif;
+4) font-family: "Martian Mono", monospace;
+5) font-family: "Cutive Mono", monospace;
+6) font-family: "Kode Mono", monospace;
+*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Rubik", sans-serif;
+  color: #212529;
+  margin: 0 10rem;
+}
+input {
+  outline: none;
+  border: none;
+}

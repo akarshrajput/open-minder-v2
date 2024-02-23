@@ -1,0 +1,12 @@
+.search {
+  justify-self: start;
+}
+.search input {
+  border: 1px solid #e9ecef;
+  font-size: 1.8rem;
+  width: 40rem;
+  font-size: 1.6rem;
+  padding: 1.2rem 1rem;
+  background-color: #f1f3f5;
+  border-radius: 0rem;
+}
