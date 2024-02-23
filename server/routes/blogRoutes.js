@@ -12,7 +12,7 @@ router
 
 router
   .route("/:id")
-  .get(authController.protect, blogController.getBlog)
+  .get(blogController.getBlog)
   .patch(authController.protect, blogController.updateBlog)
   .delete(authController.protect, blogController.deleteBlog);
 
