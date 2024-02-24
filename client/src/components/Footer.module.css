@@ -1,0 +1,48 @@
+.footer {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  padding: 2rem 1rem;
+  background-color: #fff4e6;
+  border: 1px solid #ffe8cc;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  color: #000000c6;
+  border-radius: 0.6rem;
+}
+.fContent {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-weight: 500;
+}
+.fContent p {
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.3s;
+}
+.copyrightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1.2rem;
+  justify-self: start;
+  font-weight: 500;
+}
+.button {
+  color: #fff;
+  background-color: #74b816;
+  padding: 0.4rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+}
+.copyright {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.6rem;
+}
+.copyright span {
+  font-weight: 500;
+}

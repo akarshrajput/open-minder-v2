@@ -8,6 +8,7 @@ exports.getAllBlogs = async (req, res, next) => {
       .sort()
       .limitFields()
       .paginate();
+
     const blogs = await features.query;
     res.status(200).json({
       status: "success",
@@ -34,6 +35,16 @@ exports.getBlog = async (req, res, next) => {
         status: "error",
         message: "Blog not found with the provided ID.",
       });
+    }
+
+    // Add users to views array
+    const userId = req.user && req.user.id;
+    if (userId) {
+      const hasVisited = blog.viewsArr.includes(userId);
+      if (!hasVisited) {
+        blog.viewsArr.push(userId);
+        await blog.save();
+      }
     }
 
     res.status(200).json({

@@ -35,9 +35,15 @@ const blogSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    views: {
-      type: Number,
-      default: 0,
+    viewsArr: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: "User",
+        },
+      ],
+      // select: false,
+      default: [],
     },
     tags: {
       type: [
@@ -167,18 +173,23 @@ const blogSchema = new mongoose.Schema(
 );
 
 blogSchema.virtual("readTime").get(function () {
-  // Assuming an average reading speed of 200 words per minute
   const wordsPerMinute = 120;
   const wordCount = this.content.split(/\s+/).length;
   const readTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
   return `${readTimeMinutes}`;
 });
 
+blogSchema.virtual("views").get(function () {
+  const viewsArr = this.get("viewsArr");
+  const numberofViews = viewsArr.length;
+  return Number(`${numberofViews}`);
+});
+
 blogSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
     select: "name username email verified",
-  });
+  }).populate({ path: "viewsArr", select: "name -_id" });
   next();
 });
 

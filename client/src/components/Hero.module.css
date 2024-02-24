@@ -1,0 +1,39 @@
+.hero {
+  background-color: #f4fce3;
+  border: 1px solid #e9fac8;
+  padding: 3rem 1rem;
+  margin-bottom: 4rem;
+  border-radius: 0.6rem;
+}
+.quote {
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #000;
+}
+.quotePara {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #000000be;
+}
+.langInfo {
+  font-size: 1.6rem;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #0000008a;
+}
+.button {
+  background-color: #343a40;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 0.7rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0.6rem;
+}
