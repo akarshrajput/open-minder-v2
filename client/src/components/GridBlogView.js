@@ -44,10 +44,14 @@ function GridBlogItem({ blog }) {
   return (
     <div className={styles.blogItem}>
       <div className={styles.authorInfo}>
-        <img className={styles.authorImage} src={img} />
+        <img
+          className={styles.authorImage}
+          src={img}
+          alt={`${blog.author.name}'s profile`}
+        />
         <p className={styles.authorName}>{blog.author.name}</p>
         {blog.author.verified ? (
-          <CircleWavyCheck size={16} weight="fill" color="#74b816" />
+          <CircleWavyCheck size={16} weight="fill" color="#339af0" />
         ) : (
           ""
         )}

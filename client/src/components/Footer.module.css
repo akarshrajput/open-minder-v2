@@ -2,8 +2,8 @@
   margin-top: 4rem;
   margin-bottom: 1rem;
   padding: 2rem 1rem;
-  background-color: #fff4e6;
-  border: 1px solid #ffe8cc;
+  background-color: #f8f9fa;
+  border: 1px solid #edede9;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -32,7 +32,7 @@
 }
 .button {
   color: #fff;
-  background-color: #74b816;
+  background-color: #93a494;
   padding: 0.4rem;
   cursor: pointer;
   border-radius: 0.4rem;

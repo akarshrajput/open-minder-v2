@@ -45,10 +45,14 @@ function GridBlogItem({ blog }) {
       <div className={styles.blogContent}>
         <div className={styles.authorInfo}>
           <div className={styles.nameCont}>
-            <img className={styles.authorImage} src={img} />
+            <img
+              className={styles.authorImage}
+              src={img}
+              alt={`${blog.author.name}'s profile of Open Minder`}
+            />
             <p className={styles.authorName}>{blog.author.name}</p>
             {blog.author.verified ? (
-              <CircleWavyCheck size={16} weight="fill" color="#74b816" />
+              <CircleWavyCheck size={16} weight="fill" color="#339af0" />
             ) : (
               ""
             )}
@@ -67,7 +71,11 @@ function GridBlogItem({ blog }) {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <img className={styles.blogImage} src={img1} alt="Blog Image" />
+        <img
+          className={styles.blogImage}
+          src={img1}
+          alt={`Blog of ${blog.heading}`}
+        />
       </div>
     </div>
   );

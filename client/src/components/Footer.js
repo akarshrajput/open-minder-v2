@@ -15,6 +15,7 @@ function Footer() {
         <p>
           For more info - <span className={styles.button}>Read More</span>
         </p>
+        <p>Contact - akarshrajput.01@gmail.com</p>
       </div>
       <div className={styles.fContent}>
         <p>Terms and Conditions</p>

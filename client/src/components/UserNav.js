@@ -1,5 +1,6 @@
 import styles from "./UserNav.module.css";
-import { Newspaper, Translate, ShieldCheck, Bell } from "phosphor-react";
+import { Translate } from "phosphor-react";
+import { SunDim } from "phosphor-react";
 
 function UserNav() {
   return (
@@ -8,17 +9,8 @@ function UserNav() {
         Speech
         <Translate size={14} weight="bold" />
       </p>
-      <p className={styles.navlink}>
-        Security
-        <ShieldCheck size={14} weight="bold" />
-      </p>
-      <p className={styles.navlink}>
-        Paper
-        <Newspaper size={14} weight="bold" />
-      </p>
-      <p className={styles.navlink}>
-        Notifier
-        <Bell size={14} weight="bold" />
+      <p className={styles.navCir}>
+        <SunDim size={18} weight="bold" />
       </p>
       <p className={styles.special1}>Sign Up</p>
       <p className={styles.special2}>Sign In</p>

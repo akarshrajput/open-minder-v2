@@ -7,23 +7,32 @@
   font-weight: 400;
 }
 .userNav p {
-  padding: 0.6rem 1rem;
-  border-radius: 0.4rem;
+  padding: 0.4rem;
+  border-radius: 2rem;
   cursor: pointer;
 }
 .special1 {
   background-color: #343a40;
   color: #fff;
+  padding: 0.7rem 1.2rem !important;
 }
 .special2 {
-  background-color: #66a80f;
+  background-color: #93a494;
   color: #fff;
+  padding: 0.7rem 1.2rem !important;
 }
 .navlink {
-  background-color: #fff;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   color: #000;
-  background-color: #f4fce3;
+  /* background-color: #f4fce3; */
+}
+.navCir {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #000;
+  /* background-color: #dee2e6; */
+  /* border-radius: 4rem !important; */
 }
