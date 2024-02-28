@@ -145,6 +145,7 @@ const blogSchema = new mongoose.Schema(
         "Religion",
         "Robotics",
         "Science",
+        "Space",
         "Social Media",
         "Spirituality",
         "Sports",

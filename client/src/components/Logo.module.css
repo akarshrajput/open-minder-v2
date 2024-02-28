@@ -9,4 +9,5 @@
 .logo img {
   width: 4.6rem;
   font-family: inherit;
+  cursor: pointer;
 }

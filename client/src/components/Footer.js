@@ -11,13 +11,13 @@ function Footer() {
           Copyright <Copyright size={14} /> <span>Open Minder</span>
           {date}
         </p>
-        <p>Open Minder - Open Source data</p>
+        {/* <p>Open Minder - Open Source data</p>
         <p>
           For more info - <span className={styles.button}>Read More</span>
-        </p>
-        <p>Contact - akarshrajput.01@gmail.com</p>
+        </p> */}
+        {/* <p>Contact - akarshrajput.01@gmail.com</p> */}
       </div>
-      <div className={styles.fContent}>
+      {/* <div className={styles.fContent}>
         <p>Terms and Conditions</p>
         <p>Privacy Policy</p>
         <p>Speech Rights</p>
@@ -28,7 +28,7 @@ function Footer() {
         <p>Blog</p>
         <p>Service</p>
         <p>Contact us</p>
-      </div>
+      </div> */}
     </div>
   );
 }

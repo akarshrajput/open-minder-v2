@@ -1,14 +1,37 @@
-import Header from "./components/Header";
 import { BlogsProvider } from "./context/blogsContext";
 import Overview from "./pages/Overview";
+import BlogLayout from "./pages/BlogLayout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Blog from "./components/Blog";
+import UserLayout from "./pages/UserLayout";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Error from "./components/Error";
+import { AuthProvider } from "./context/AuthContext";
+import CurrentUserLayout from "./pages/CurrentUserLayout";
 
 function App() {
   return (
     <div>
-      <BlogsProvider>
-        <Header />
-        <Overview />
-      </BlogsProvider>
+      <AuthProvider>
+        <BlogsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Overview />} />
+              <Route path="/en-us" element={<BlogLayout />}>
+                <Route path="blog/:id" element={<Blog />} />
+              </Route>
+              <Route path="/">
+                <Route path=":username/:id" element={<UserLayout />} />
+              </Route>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Error />} />
+              <Route path="/me/:username" element={<CurrentUserLayout />} />
+            </Routes>
+          </BrowserRouter>
+        </BlogsProvider>
+      </AuthProvider>
     </div>
   );
 }

@@ -1,0 +1,70 @@
+.blogWidth {
+  width: 80rem;
+  margin: 0 auto;
+}
+.authorCategory {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2f9e44;
+  margin-bottom: 1rem;
+}
+.blogTime {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.minRead {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.createdAt {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.blogHeading {
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-family: "Roboto Slab", serif;
+}
+.tags {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.blogDesc {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.authorName {
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.blogPhoto {
+  width: 100%;
+  border-radius: 1rem;
+}
+.userImage {
+  width: 2.2rem;
+  border-radius: 2rem;
+}
+.blogDescAlt {
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+}
+.blogContent {
+  font-size: 1.7rem;
+  margin-top: 2.6rem;
+  font-family: "Roboto Slab", serif;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+}

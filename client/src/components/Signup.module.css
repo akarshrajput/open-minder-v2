@@ -1,0 +1,53 @@
+.login {
+  width: 40rem;
+  margin: 0 auto;
+}
+.form {
+  background-color: #93a4945d;
+  padding: 4rem;
+  margin-top: 10rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.form div label {
+  font-size: 1.6rem;
+  color: #00000092;
+}
+.commonInput {
+  border-radius: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  padding: 0.6rem;
+  font-family: inherit;
+}
+button {
+  border-radius: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #fff;
+  padding: 1rem;
+  font-family: inherit;
+  border: none;
+  background-color: #8ea990;
+  cursor: pointer;
+}
+.para {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+.para span {
+  font-weight: 400;
+  background-color: #8ea990;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}

@@ -12,11 +12,11 @@ function BlogsProvider({ children }) {
     async function getAllBlogs() {
       setIsLoading(true);
       const res = await fetch(
-        `${BASE_URL}/api/v1/blogs?sort=createdAt&limit=8`
+        `${BASE_URL}/api/v1/blogs?sort=-createdAt&limit=8`
       );
       const data = await res.json();
       const blogsArray = data.data.blogs;
-      console.log(blogsArray);
+      // console.log(blogsArray);
       setAllBlogs(blogsArray);
       setIsLoading(false);
     }

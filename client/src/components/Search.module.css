@@ -1,6 +1,5 @@
 .search {
   justify-self: start;
-  /* border: 1px solid #e9fac8; */
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -9,7 +8,9 @@
   background-color: #f8f9fa;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  position: relative; /* Added position relative */
 }
+
 .search input {
   font-size: 1.8rem;
   width: 22rem;
@@ -18,13 +19,43 @@
   padding: 1.4rem 0rem;
   background-color: #f8f9fa;
 }
-/* .search input:hover,
-.search input:active {
-  border: 1px solid #f76707;
-} */
+
+.searchContainer {
+  position: absolute;
+  top: 100%; /* Position it below the search box */
+  left: 0;
+  width: 50rem; /* Full width */
+  max-height: 20rem;
+  overflow-y: auto; /* Add a scrollbar if content exceeds the container height */
+  background-color: #f8faf8; /* Adjust background color */
+  /* border: 1px solid #e9fac8; */
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
 
 .search input::placeholder {
   font-weight: 400;
   color: #343a40;
-  /* font-family: "Kode Mono", monospace; */
 }
+
+.searchContainer ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.searchContainer ul li {
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  background-color: #65676521;
+  /* border: 2px solid #e8e6e6; */
+  transition: background-color 0.3s ease;
+}
+.searchContainer ul li:hover {
+  background-color: #6567654c; /* Change the background color on hover */
+}
+/* Add any additional styles for the container and adjust as needed */
