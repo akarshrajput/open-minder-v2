@@ -57,7 +57,7 @@ function BlogContainer({ blog }) {
           <img
             src={user}
             className={styles.userImage}
-            alt={blog.author.username}
+            alt={blog.author?.username}
           />
           <p className={styles.authorName} onClick={handleUserClick}>
             {blog.author?.name}
@@ -74,7 +74,7 @@ function BlogContainer({ blog }) {
           <img
             src={img}
             className={styles.blogPhoto}
-            alt={blog.author.username}
+            alt={blog.author?.username}
           />
           <p className={styles.blogDescAlt}>@openminder</p>
           <p className={styles.blogContent}>{blog.content}</p>

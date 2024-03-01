@@ -11,22 +11,25 @@ const BASE_URL = "http://localhost:3000";
 function User() {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { username, id } = useParams();
+  const { id } = useParams();
 
-  useEffect(function () {
-    try {
-      setIsLoading(true);
-      async function getUser() {
-        const res = await axios.get(`${BASE_URL}/api/v1/users/${id}`);
-        setUser(res.data.data.user);
+  useEffect(
+    function () {
+      try {
+        setIsLoading(true);
+        async function getUser() {
+          const res = await axios.get(`${BASE_URL}/api/v1/users/${id}`);
+          setUser(res.data.data.user);
+          setIsLoading(false);
+        }
+        getUser();
+      } catch (err) {
+        console.log(err);
         setIsLoading(false);
       }
-      getUser();
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-    }
-  }, []);
+    },
+    [id]
+  );
 
   console.log(user);
   return (

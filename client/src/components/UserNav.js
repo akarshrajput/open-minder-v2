@@ -50,6 +50,7 @@ function UserNav() {
             onClick={handleUserNavigate}
             src={img}
             className={styles.userPhoto}
+            alt="user img"
           />
           <p className={styles.logoutBtn} onClick={handleLogout}>
             Logout
