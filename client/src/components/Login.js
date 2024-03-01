@@ -22,6 +22,10 @@ function Login() {
     navigate("/signup");
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   useEffect(
     function () {
       if (isAuthenticated) {
@@ -37,6 +41,7 @@ function Login() {
         <div>
           <label>Username</label>
           <input
+            type="text"
             className={styles.commonInput}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -45,6 +50,7 @@ function Login() {
         <div>
           <label>Password</label>
           <input
+            type="password"
             className={styles.commonInput}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -54,6 +60,9 @@ function Login() {
       </form>
       <p className={styles.para}>
         Don't have account? <span onClick={handleNavigateSignup}>SignUp</span>
+      </p>
+      <p className={styles.back}>
+        <span onClick={handleBack}>Go back</span>
       </p>
     </div>
   );

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function CurrentUser() {
-  useEffect(function () {}, []);
+  const { user } = useAuth();
 
-  const { username } = useParams();
   return (
     <div>
-      <p>{username}</p>
+      <p>{user.name}</p>
     </div>
   );
 }

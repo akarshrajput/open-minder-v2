@@ -25,6 +25,10 @@ function Signup() {
     navigate("/login");
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   useEffect(
     function () {
       if (isAuthenticated) {
@@ -40,6 +44,7 @@ function Signup() {
         <div>
           <label>Name</label>
           <input
+            type="text"
             className={styles.commonInput}
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -48,6 +53,7 @@ function Signup() {
         <div>
           <label>Username</label>
           <input
+            type="text"
             className={styles.commonInput}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -56,6 +62,7 @@ function Signup() {
         <div>
           <label>Email</label>
           <input
+            type="text"
             className={styles.commonInput}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -64,6 +71,7 @@ function Signup() {
         <div>
           <label>Password</label>
           <input
+            type="password"
             className={styles.commonInput}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -72,6 +80,7 @@ function Signup() {
         <div>
           <label>Confirm Password</label>
           <input
+            type="password"
             className={styles.commonInput}
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -81,6 +90,9 @@ function Signup() {
       </form>
       <p className={styles.para}>
         Already have account? <span onClick={handleNavigateLogin}>Login</span>
+      </p>
+      <p className={styles.back}>
+        <span onClick={handleBack}>Go back</span>
       </p>
     </div>
   );

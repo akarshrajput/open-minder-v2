@@ -51,4 +51,6 @@ router
     userController.deleteUser
   );
 
+router.post("/verify-token", authController.verifyToken);
+
 module.exports = router;

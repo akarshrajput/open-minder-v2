@@ -261,3 +261,28 @@ exports.updatePassword = async (req, res, next) => {
     });
   }
 };
+
+exports.verifyToken = async (req, res) => {
+  try {
+    // Extract the token from the headers or request body
+    const token = req.headers.authorization.split(" ")[1];
+
+    // Verify the token
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+
+    // If verification is successful, send user information
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: decoded.user,
+      },
+    });
+  } catch (err) {
+    // If verification fails, send an error response
+    console.error(err);
+    res.status(401).json({
+      status: "fail",
+      message: "Invalid token",
+    });
+  }
+};

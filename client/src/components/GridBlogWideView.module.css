@@ -29,7 +29,7 @@
   margin-bottom: 0.6rem;
 }
 .authorName {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -56,7 +56,7 @@
   cursor: pointer;
 }
 .blogDesc {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 0.6rem;
   line-height: 1.3;
   cursor: pointer;

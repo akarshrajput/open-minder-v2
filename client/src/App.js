@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import Error from "./components/Error";
 import { AuthProvider } from "./context/AuthContext";
 import CurrentUserLayout from "./pages/CurrentUserLayout";
+import BlogWriteContainer from "./pages/BlogWriteContainer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<Error />} />
               <Route path="/me/:username" element={<CurrentUserLayout />} />
+              <Route path="/writeblog" element={<BlogWriteContainer />} />
             </Routes>
           </BrowserRouter>
         </BlogsProvider>

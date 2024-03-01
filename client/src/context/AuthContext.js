@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:3000";
@@ -15,19 +15,27 @@ function reducer(state, action) {
     case "SIGNUP_SUCCESS":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isAuthenticated: true,
       };
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isAuthenticated: true,
       };
     case "LOGOUT_SUCCESS":
-    case "GET_USER":
-    case "UPDATE_SUCCESS":
-    case "DELETE_USER":
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+      };
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.payload.user,
+        isAuthenticated: true,
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -38,6 +46,46 @@ function AuthProvider({ children }) {
     reducer,
     initialState
   );
+
+  useEffect(() => {
+    async function checkAndAutoLogin() {
+      const token = getCookie("jwt");
+      if (token) {
+        try {
+          const response = await axios.get(`${BASE_URL}/api/v1/users/me`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.data.status === "success") {
+            const { user } = response.data.data;
+            dispatch({
+              type: "SET_USER",
+              payload: { user },
+            });
+          } else {
+            // Token is no longer valid, logout the user
+            dispatch({ type: "LOGOUT_SUCCESS" });
+            document.cookie =
+              "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"; // Remove the invalid cookie
+          }
+        } catch (err) {
+          console.error("Error checking token:", err);
+          // Token is no longer valid, logout the user
+          dispatch({ type: "LOGOUT_SUCCESS" });
+          document.cookie =
+            "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"; // Remove the invalid cookie
+        }
+      } else {
+        // No token found, set isLoading to false
+        dispatch({ type: "LOGOUT_SUCCESS" });
+      }
+    }
+
+    checkAndAutoLogin();
+  }, [dispatch]);
+
   async function signup(name, username, email, password, passwordConfirm) {
     try {
       const response = await axios.post(`${BASE_URL}/api/v1/users/signup`, {
@@ -50,7 +98,6 @@ function AuthProvider({ children }) {
 
       if (response.data.status === "success") {
         const { user, token } = response.data.data;
-        console.log(user);
         dispatch({
           type: "SIGNUP_SUCCESS",
           payload: { user },
@@ -58,7 +105,6 @@ function AuthProvider({ children }) {
         document.cookie = `jwt=${token}; path=/`;
       } else {
         console.error(response.data.message);
-        // dispatch({ type: "SIGNUP_ERROR", payload: response.data.message });
       }
     } catch (err) {
       console.log("Error: ", err);
@@ -71,31 +117,41 @@ function AuthProvider({ children }) {
         username,
         password,
       });
-      //   console.log(response);
+
       if (response.data.status === "success") {
-        const { user, token } = response.data.data;
+        const token = response.data.token;
+        const user = response.data.data.user;
         console.log(user);
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: { user },
         });
-        document.cookie = `jwt=${token}; path=/`;
+        document.cookie = `jwt=${token}; path=/; expires=${new Date(
+          Date.now() + 7 * 24 * 60 * 60 * 1000
+        ).toUTCString()}`;
       } else {
         console.error(response.data.message);
-        // dispatch({ type: "SIGNUP_ERROR", payload: response.data.message });
       }
     } catch (err) {
       console.log("Error: ", err);
     }
   }
 
-  function logout() {}
+  function logout() {
+    dispatch({ type: "LOGOUT_SUCCESS" });
+    document.cookie = "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
 
-  function getUser() {}
-
-  function updateUser() {}
-
-  function deleteUser() {}
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName === name) {
+        return cookieValue;
+      }
+    }
+    return null;
+  }
 
   return (
     <AuthContext.Provider
@@ -105,9 +161,6 @@ function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        getUser,
-        updateUser,
-        deleteUser,
       }}
     >
       {children}

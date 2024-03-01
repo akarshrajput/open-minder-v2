@@ -2,3 +2,46 @@
   width: 80rem;
   margin: 0 auto;
 }
+.userMainInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.userNameInfo {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.userName {
+  font-size: 1.6rem;
+  background-color: #93a49429;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+}
+.name {
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: #93a494;
+}
+.email {
+  font-size: 1.6rem;
+  color: #000000a2;
+}
+.bio {
+  font-size: 1.4rem;
+}
+.bio span {
+  font-weight: 500;
+}
+.secInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.passion {
+  font-size: 1.4rem;
+}
+.passion span {
+  font-weight: 500;
+}

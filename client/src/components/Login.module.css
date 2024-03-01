@@ -21,14 +21,14 @@
   color: #00000092;
 }
 .commonInput {
-  border-radius: 0.2rem;
+  border-radius: 0.6rem;
   font-size: 1.6rem;
   font-weight: 400;
-  padding: 0.6rem;
+  padding: 0.8rem;
   font-family: inherit;
 }
 button {
-  border-radius: 0.2rem;
+  border-radius: 0.6rem;
   font-size: 1.6rem;
   font-weight: 400;
   color: #fff;
@@ -46,6 +46,19 @@ button {
 .para span {
   font-weight: 400;
   background-color: #8ea990;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+.back {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+.back span {
+  font-weight: 400;
+  background-color: #040404a0;
   color: #fff;
   padding: 0.6rem 1.2rem;
   border-radius: 2rem;

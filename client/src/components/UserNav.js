@@ -4,10 +4,11 @@ import { SunDim } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import img from "./../img/default-user.jpg";
+import { PencilLine } from "phosphor-react";
 
 function UserNav() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth();
 
   const handleSignUp = () => {
     navigate(`/signup`);
@@ -18,7 +19,17 @@ function UserNav() {
   };
 
   const handleUserNavigate = () => {
-    navigate(`/me/${user.user.username}`);
+    navigate(`/me/${user.username}`);
+    console.log(user);
+  };
+
+  const handleWriteBlog = () => {
+    navigate(`/writeblog`);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -30,14 +41,19 @@ function UserNav() {
       <p className={styles.navCir}>
         <SunDim size={18} weight="bold" />
       </p>
-      {user !== null ? (
+      {isAuthenticated ? (
         <>
+          <p className={styles.write} onClick={handleWriteBlog}>
+            <PencilLine size={16} /> Write
+          </p>
           <img
             onClick={handleUserNavigate}
             src={img}
             className={styles.userPhoto}
           />
-          <p>{user.user.name}</p>
+          <p className={styles.logoutBtn} onClick={handleLogout}>
+            Logout
+          </p>
         </>
       ) : (
         <>

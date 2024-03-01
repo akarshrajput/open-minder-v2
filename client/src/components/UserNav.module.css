@@ -37,7 +37,21 @@
   /* border-radius: 4rem !important; */
 }
 .userPhoto {
-  width: 3rem;
+  width: 3.4rem;
   border-radius: 2rem;
   cursor: pointer;
+}
+.logoutBtn {
+  background-color: #4e715195;
+  color: #fff;
+  padding: 0.7rem 1.2rem !important;
+}
+.write {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #000;
+  /* background-color: #1e1e1ecf; */
+  padding: 0.7rem 1.2rem !important;
+  /* color: #fff; */
 }
