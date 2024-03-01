@@ -40,7 +40,6 @@ function BlogContainer({ blog }) {
   const handleUserClick = () => {
     navigate(`/${blog.author.username}/${blog.author._id}`);
   };
-
   return (
     <div className={styles.blogWidth}>
       <div className={styles.blogInfo}>
@@ -55,7 +54,11 @@ function BlogContainer({ blog }) {
           <p className={styles.blogDesc}>{blog.description}</p>
         </div>
         <div className={styles.authorInfo}>
-          <img src={user} className={styles.userImage} />
+          <img
+            src={user}
+            className={styles.userImage}
+            alt={blog.author.username}
+          />
           <p className={styles.authorName} onClick={handleUserClick}>
             {blog.author?.name}
           </p>
@@ -68,7 +71,11 @@ function BlogContainer({ blog }) {
           </p>
         </div>
         <div>
-          <img src={img} className={styles.blogPhoto} />
+          <img
+            src={img}
+            className={styles.blogPhoto}
+            alt={blog.author.username}
+          />
           <p className={styles.blogDescAlt}>@openminder</p>
           <p className={styles.blogContent}>{blog.content}</p>
         </div>
