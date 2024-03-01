@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://open-minder-v2.onrender.com";
 
 const BlogsContext = createContext();
 

@@ -4,7 +4,7 @@ import { MagnifyingGlass } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://open-minder-v2.onrender.com";
 
 function Search() {
   const [input, setInput] = useState("");

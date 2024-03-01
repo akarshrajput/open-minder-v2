@@ -6,7 +6,7 @@ import { CircleWavyCheck } from "phosphor-react";
 import img from "./../img/blog-image.jpeg";
 import user from "./../img/default-user.jpg";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://open-minder-v2.onrender.com";
 
 function Blog() {
   const [blog, setBlog] = useState({});

@@ -6,7 +6,7 @@ import axios from "axios";
 import Loader from "./Loader";
 import { CircleWavyCheck } from "phosphor-react";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://open-minder-v2.onrender.com";
 
 function User() {
   const [user, setUser] = useState({});
