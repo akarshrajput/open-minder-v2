@@ -45,6 +45,10 @@ const blogSchema = new mongoose.Schema(
       // select: false,
       default: [],
     },
+    usedAI: {
+      type: Boolean,
+      default: false,
+    },
     tags: {
       type: [
         {
@@ -62,6 +66,11 @@ const blogSchema = new mongoose.Schema(
         },
       ],
       required: true,
+    },
+    blogType: {
+      default: "blog",
+      type: String,
+      enum: ["research", "blog"],
     },
     category: {
       type: String,

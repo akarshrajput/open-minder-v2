@@ -1,4 +1,5 @@
 const User = require("./../models/userModel");
+const APIFeatures = require("./../utils/apiFeatures");
 // const multer = require("multer");
 // const sharp = require("sharp");
 
@@ -82,7 +83,13 @@ exports.deleteMe = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const features = new APIFeatures(User.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const users = await features.query;
     res.status(200).json({
       status: "success",
       results: users.length,
