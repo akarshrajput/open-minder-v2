@@ -1,7 +1,7 @@
 import axios from "axios";
 import supabase from "./supabase";
 
-const BASE_URL = "open-minder-v2-backend.up.railway.app";
+const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
 // const supabaseURL = "https://levtozcwxamsnighgjbp.supabase.co";
 
 export async function updateUserData(data) {

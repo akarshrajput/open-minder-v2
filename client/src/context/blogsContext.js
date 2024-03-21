@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
-const BASE_URL = "open-minder-v2-backend.up.railway.app";
+const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
 
 const BlogsContext = createContext();
 
