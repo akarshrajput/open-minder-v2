@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "open-minder-v2-backend.up.railway.app";
 
 const AuthContext = createContext();
 

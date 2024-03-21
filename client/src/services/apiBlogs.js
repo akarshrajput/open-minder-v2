@@ -1,6 +1,6 @@
 import axios from "axios";
 import supabase from "./supabase";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "open-minder-v2-backend.up.railway.app";
 const supabaseURL = "https://levtozcwxamsnighgjbp.supabase.co";
 
 export async function getAllBlogs() {

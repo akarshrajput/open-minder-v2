@@ -5,7 +5,7 @@ import axios from "axios";
 import Loader from "./Loader";
 import { CircleWavyCheck } from "phosphor-react";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "open-minder-v2-backend.up.railway.app";
 
 function User() {
   const [user, setUser] = useState({});
