@@ -1,4 +1,6 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BlogsProvider } from "./context/blogsContext";
+import { Toaster } from "react-hot-toast";
 import Overview from "./pages/Overview";
 import BlogLayout from "./pages/BlogLayout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,31 +12,67 @@ import Error from "./components/Error";
 import { AuthProvider } from "./context/AuthContext";
 import CurrentUserLayout from "./pages/CurrentUserLayout";
 import BlogWriteContainer from "./pages/BlogWriteContainer";
+import BlogWriteContainerAI from "./pages/BlogWriteContainerAI";
+import Docs from "./pages/Docs";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  },
+});
 
 function App() {
   return (
-    <div>
-      <AuthProvider>
-        <BlogsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Overview />} />
-              <Route path="/en-us" element={<BlogLayout />}>
-                <Route path="blog/:id" element={<Blog />} />
-              </Route>
-              <Route path="/">
-                <Route path=":username/:id" element={<UserLayout />} />
-              </Route>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Error />} />
-              <Route path="/me/:username" element={<CurrentUserLayout />} />
-              <Route path="/writeblog" element={<BlogWriteContainer />} />
-            </Routes>
-          </BrowserRouter>
-        </BlogsProvider>
-      </AuthProvider>
-    </div>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <BlogsProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Overview />} />
+                <Route path="/en-us" element={<BlogLayout />}>
+                  <Route path="blog/:id" element={<Blog />} />
+                </Route>
+                <Route path="/">
+                  <Route path=":username/:id" element={<UserLayout />} />
+                </Route>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Error />} />
+                <Route path="/me/:username" element={<CurrentUserLayout />} />
+                <Route path="/writeblog" element={<BlogWriteContainer />} />
+                <Route
+                  path="/writeblog/minder"
+                  element={<BlogWriteContainerAI />}
+                />
+                <Route path="/docs" element={<Docs />} />
+              </Routes>
+            </BrowserRouter>
+          </BlogsProvider>
+        </AuthProvider>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "#f8fafc",
+            },
+          }}
+        />
+      </QueryClientProvider>
+    </>
   );
 }
 

@@ -27,15 +27,17 @@
   padding: 0.8rem;
   font-family: inherit;
 }
-button {
-  border-radius: 0.6rem;
+.form button {
+  border-radius: 2rem !important;
+  width: fit-content;
+  align-self: center;
   font-size: 1.6rem;
   font-weight: 400;
   color: #fff;
   padding: 1rem;
   font-family: inherit;
   border: none;
-  background-color: #8ea990;
+  background-color: #343a40 !important;
   cursor: pointer;
 }
 .para {
@@ -45,10 +47,8 @@ button {
 }
 .para span {
   font-weight: 400;
-  background-color: #8ea990;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 2rem;
+  border-bottom: 2px solid #4263eb;
+  color: #4263eb;
   cursor: pointer;
 }
 .back {
@@ -58,9 +58,9 @@ button {
 }
 .back span {
   font-weight: 400;
-  background-color: #040404a0;
+  background-color: #343a40;
   color: #fff;
   padding: 0.6rem 1.2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   cursor: pointer;
 }

@@ -86,7 +86,7 @@ function Signup() {
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
         </div>
-        <button>Submit</button>
+        <button>Signup</button>
       </form>
       <p className={styles.para}>
         Already have account? <span onClick={handleNavigateLogin}>Login</span>

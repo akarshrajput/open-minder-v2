@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import styles from "./Search.module.css";
 import { MagnifyingGlass } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
-import Loader from "./Loader";
-
-const BASE_URL = "https://open-minder-v2.onrender.com";
+import { getSearchBlogs } from "./../services/apiBlogs";
 
 function Search() {
   const [input, setInput] = useState("");
   const [showContainer, setShowContainer] = useState(false);
   const [blogHeadings, setBlogHeadings] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [searchTypeValue, setSearchTypeValue] = useState("blog");
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["searchBlogs", input],
+    queryFn: () => getSearchBlogs(input),
+  });
 
   const navigate = useNavigate();
 
-  const results = blogHeadings.length;
+  const results = blogHeadings?.length;
 
   const handleBlogClick = (blogId) => {
     navigate(`/en-us/blog/${blogId}`);
@@ -22,41 +26,43 @@ function Search() {
     setInput("");
   };
 
-  useEffect(
-    function () {
-      try {
-        async function getSearchedBlogs() {
-          setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/api/v1/blogs?heading=${input}`);
-          const data = await res.json();
-          const headings = data.data.blogs.map((blog) => ({
-            id: blog.id,
-            text: `${blog.author.name} : ${blog.heading}`,
-          }));
-          console.log(headings);
-          setBlogHeadings(headings);
-        }
-        getSearchedBlogs();
-      } catch (err) {
-        console.log("Error: ", err);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [input]
-  );
+  useEffect(() => {
+    if (data && data.data && data.data.blogs) {
+      const headings = data.data.blogs.map((blog) => ({
+        id: blog.id,
+        text: `${blog.author.name} : ${blog.heading}`,
+      }));
+      setBlogHeadings(headings);
+    }
+  }, [data]);
 
   return (
-    <>
+    <div>
       <div className={styles.search}>
-        <MagnifyingGlass size={20} weight="bold" />
+        <select
+          onChange={(e) => setSearchTypeValue(e.target.value)}
+          value={searchTypeValue}
+          className={styles.selectType}
+        >
+          <option value="blog">Blog</option>
+          <option value="user">User</option>
+        </select>
         <input
-          placeholder="Search"
+          placeholder={
+            searchTypeValue === "blog"
+              ? `Search for minders, articles and more...`
+              : `Search for ${searchTypeValue}s`
+          }
           value={input}
           onChange={(e) => {
             setInput(e.target.value);
             setShowContainer(!!e.target.value); // Show container when there's input
           }}
+        />
+        <MagnifyingGlass
+          className={styles.searchSubmit}
+          size={20}
+          weight="bold"
         />
       </div>
       <SearchResult
@@ -66,7 +72,7 @@ function Search() {
         results={results}
         handleBlogClick={handleBlogClick}
       />
-    </>
+    </div>
   );
 }
 
@@ -77,13 +83,15 @@ function SearchResult({
   results,
   handleBlogClick,
 }) {
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    <p>Loading...</p>;
+  }
   return (
     <div>
       {showContainer && (
         <div className={styles.searchContainer}>
-          {blogHeadings.length === 0 ? (
-            <p>No results</p>
+          {isLoading ? (
+            <p>Loading...</p>
           ) : (
             <ul>
               <li>Results : {results}</li>

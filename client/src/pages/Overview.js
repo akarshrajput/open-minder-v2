@@ -1,4 +1,3 @@
-// import ExploreMore from "../components/ExploreMore";
 import Footer from "../components/Footer";
 import GridBlogView from "../components/GridBlogView";
 import GridBlogWideView from "../components/GridBlogWideView";
@@ -8,7 +7,7 @@ import Header from "./../components/Header";
 function Overview() {
   return (
     <div className="overview">
-      <Header />
+      <Header bg="#fcc419" />
       <Hero />
       <GridBlogView />
       <GridBlogWideView />

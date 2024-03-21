@@ -1,18 +1,10 @@
 import styles from "./UserNav.module.css";
-import { Translate } from "phosphor-react";
-import { SunDim } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import img from "./../img/default-user.jpg";
-import { PencilLine } from "phosphor-react";
 
 function UserNav() {
   const navigate = useNavigate();
-  const { user, logout, isAuthenticated } = useAuth();
-
-  const handleSignUp = () => {
-    navigate(`/signup`);
-  };
+  const { user, isAuthenticated } = useAuth();
 
   const handleSignIn = () => {
     navigate(`/login`);
@@ -23,44 +15,21 @@ function UserNav() {
     console.log(user);
   };
 
-  const handleWriteBlog = () => {
-    navigate(`/writeblog`);
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   return (
     <div className={styles.userNav}>
-      <p className={styles.navlink}>
-        Speech
-        <Translate size={14} weight="bold" />
-      </p>
-      <p className={styles.navCir}>
-        <SunDim size={18} weight="bold" />
-      </p>
       {isAuthenticated ? (
         <>
-          <p className={styles.write} onClick={handleWriteBlog}>
-            <PencilLine size={16} /> Write
-          </p>
-          <img
-            onClick={handleUserNavigate}
-            src={img}
-            className={styles.userPhoto}
-            alt="user img"
-          />
-          <p className={styles.logoutBtn} onClick={handleLogout}>
-            Logout
-          </p>
+          <div className={styles.photoContainer}>
+            <img
+              onClick={handleUserNavigate}
+              src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${user?.photo}`}
+              className={styles.userPhoto}
+              alt="user img"
+            />
+          </div>
         </>
       ) : (
         <>
-          <p onClick={handleSignUp} className={styles.special1}>
-            Sign Up
-          </p>
           <p onClick={handleSignIn} className={styles.special2}>
             Sign In
           </p>

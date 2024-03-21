@@ -1,13 +1,19 @@
-import { useAllBlogs } from "../context/blogsContext";
 import styles from "./GridBlogView.module.css";
 import Loader from "./Loader";
-import { ArrowElbowRightUp, CircleWavyCheck } from "phosphor-react";
-import img from "./../img/default-user.jpg";
+import { ArrowElbowRightDown, CircleWavyCheck, Sparkle } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getAllBlogsTrending } from "../services/apiBlogs";
+import Error from "./Error";
 
 function GridBlogView() {
-  const { allBlogs, isLoading } = useAllBlogs();
-  // console.log(allBlogs);
+  const { isLoading, data, isError } = useQuery({
+    queryKey: ["getAllBlogsTrending"],
+    queryFn: getAllBlogsTrending,
+  });
+  if (isError) {
+    return <Error />;
+  }
   return (
     <>
       {isLoading ? (
@@ -16,7 +22,7 @@ function GridBlogView() {
         <>
           <Heading />
           <div className={styles.blogContainer}>
-            {allBlogs.map((blog) => (
+            {data?.data?.blogs.map((blog) => (
               <GridBlogItem blog={blog} key={blog.id} />
             ))}
           </div>
@@ -32,7 +38,7 @@ function Heading() {
   return (
     <div className={styles.heading}>
       <p>Trending on Open Minder </p>
-      <ArrowElbowRightUp size={20} weight="bold" />
+      <ArrowElbowRightDown size={20} weight="bold" />
     </div>
   );
 }
@@ -55,11 +61,13 @@ function GridBlogItem({ blog }) {
   return (
     <div className={styles.blogItem}>
       <div className={styles.authorInfo}>
-        <img
-          className={styles.authorImage}
-          src={img}
-          alt={`${blog.author.name}'s profile`}
-        />
+        <div className={styles.photoContainer}>
+          <img
+            className={styles.userPhoto}
+            src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
+            alt={`${blog.author.name}'s profile`}
+          />
+        </div>
         <p className={styles.authorName} onClick={handleUserClick}>
           {blog.author.name}
         </p>
@@ -69,6 +77,13 @@ function GridBlogItem({ blog }) {
           ""
         )}
         <p className={styles.autherUsername}>@{blog.author.username}</p>
+        <p>
+          {blog.usedAI ? (
+            <Sparkle color="#9c36b5" size={18} weight="fill" />
+          ) : (
+            ""
+          )}
+        </p>
       </div>
       <div className={styles.blofInfo}>
         <p className={styles.blogHeading} onClick={handleBlogClick}>

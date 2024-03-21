@@ -32,38 +32,42 @@ exports.updateMe = async (req, res, next) => {
       req.body,
       "username",
       "name",
+      "photo",
       "email",
       "phone",
       "bio",
       "passion"
     );
-    // Saving image name to database
-    // if (req.file) filterBody.photo = req.file.filename;
 
-    // 3) Update user document
-    const updateUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
-      new: true,
-      runValidators: true,
-    });
-
-    res.status(200).json({
-      status: "success",
-      data: {
-        user: updateUser,
-      },
-    });
-  } catch (err) {
-    // Handle Mongoose validation errors
-    if (err.name === "ValidationError") {
-      const errors = Object.values(err.errors).map((el) => el.message);
-
-      return res.status(400).json({
-        status: "fail",
-        message: `Validation error: ${errors.join(". ")}`,
-      });
+    // 3) Remove fields from the filterBody that are empty or null
+    for (const key in filterBody) {
+      if (filterBody[key] === "" || filterBody[key] === null) {
+        delete filterBody[key];
+      }
     }
 
-    // Handle other types of errors
+    // 4) Update user document if there are valid fields to update
+    if (Object.keys(filterBody).length > 0) {
+      const updateUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
+        new: true,
+        runValidators: true,
+      });
+
+      return res.status(200).json({
+        status: "success",
+        data: {
+          user: updateUser,
+        },
+      });
+    } else {
+      // No valid fields to update
+      return res.status(400).json({
+        status: "fail",
+        message: "No valid fields provided for update.",
+      });
+    }
+  } catch (err) {
+    // Handle errors
     return res.status(500).json({
       status: "error",
       message: "Internal server error",

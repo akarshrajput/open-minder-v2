@@ -1,5 +1,5 @@
 import styles from "./Logo.module.css";
-import img from "./../img/op.png";
+import img from "./../img/open-minder.png";
 import { useNavigate } from "react-router-dom";
 
 function Logo() {
@@ -7,11 +7,13 @@ function Logo() {
 
   const handleLogoClick = () => {
     navigate("/");
+    window.scrollTo(0, 0);
   };
 
   return (
     <div className={styles.logo}>
       <img onClick={handleLogoClick} src={img} alt="Open Minder Logo" />
+      {/* <p>Open Minder</p> */}
     </div>
   );
 }

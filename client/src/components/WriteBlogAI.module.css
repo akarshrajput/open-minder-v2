@@ -8,24 +8,24 @@
   flex-direction: column;
   gap: 2rem;
 }
-.author {
-  font-size: 1.4rem;
-  color: #868e96;
-}
-.blogInfo {
-  display: flex;
-  gap: 2rem;
-}
 .pageInfo {
   color: #868e96;
   font-size: 1.4rem;
-  align-items: center;
   margin-bottom: 1rem;
   display: flex;
+  flex-direction: column;
   gap: 1.4rem;
-  margin-bottom: 1rem;
 }
 .AItext {
+  background: linear-gradient(to right bottom, #cc5de8, #845ef7);
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.noAI {
   background-color: #343a40;
   padding: 0.8rem 2rem;
   border-radius: 2rem;
@@ -34,6 +34,10 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
+}
+.blogInfo {
+  display: flex;
+  gap: 2rem;
 }
 .commonBlog {
   background-color: #f8f9fa;
@@ -59,6 +63,9 @@
 .form label {
   font-size: 1.6rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 .form select {
   background-color: #f1f3f5;
@@ -105,6 +112,22 @@
   color: #f03e3e;
   font-size: 1.6rem;
   font-weight: 500;
+}
+.sendPrompt {
+  background-color: #343a40;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #e9ecef;
+  font-size: 1.4rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+.helpertext {
+  font-size: 1.2rem;
+  color: #ff6b6b;
 }
 .errorText {
   color: #f03e3e;

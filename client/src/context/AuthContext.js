@@ -1,7 +1,8 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
-const BASE_URL = "https://open-minder-v2.onrender.com";
+const BASE_URL = "http://localhost:3000";
 
 const AuthContext = createContext();
 
@@ -97,13 +98,18 @@ function AuthProvider({ children }) {
       });
 
       if (response.data.status === "success") {
-        const { user, token } = response.data.data;
+        const token = response.data.token;
+        const user = response.data.data.user;
         dispatch({
           type: "SIGNUP_SUCCESS",
           payload: { user },
         });
-        document.cookie = `jwt=${token}; path=/`;
+        toast.success("Successfully SignedIn! Also update your Profile.");
+        document.cookie = `jwt=${token}; path=/; expires=${new Date(
+          Date.now() + 7 * 24 * 60 * 60 * 1000
+        ).toUTCString()}`;
       } else {
+        toast.success("Error Signin ", response.data.message);
         console.error(response.data.message);
       }
     } catch (err) {
@@ -126,10 +132,12 @@ function AuthProvider({ children }) {
           type: "LOGIN_SUCCESS",
           payload: { user },
         });
+        toast.success("Successfully Loggedin");
         document.cookie = `jwt=${token}; path=/; expires=${new Date(
           Date.now() + 7 * 24 * 60 * 60 * 1000
         ).toUTCString()}`;
       } else {
+        toast.success("Error Login ", response.data.message);
         console.error(response.data.message);
       }
     } catch (err) {
@@ -139,6 +147,7 @@ function AuthProvider({ children }) {
 
   function logout() {
     dispatch({ type: "LOGOUT_SUCCESS" });
+    toast.success("LoggedOut");
     document.cookie = "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 
@@ -161,6 +170,7 @@ function AuthProvider({ children }) {
         signup,
         login,
         logout,
+        getCookie,
       }}
     >
       {children}

@@ -1,12 +1,12 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import WriteBlog from "../components/WriteBlog";
+import WriteBlogAI from "../components/WriteBlogAI";
 
 function BlogWriteContainer() {
   return (
     <div className="write-blog-container">
       <Header />
-      <WriteBlog />
+      <WriteBlogAI />
       <Footer />
     </div>
   );

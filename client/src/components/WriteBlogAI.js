@@ -1,16 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import styles from "./WriteBlog.module.css";
+import styles from "./WriteBlogAI.module.css";
 import { useAuth } from "../context/AuthContext";
 import { Sparkle, Upload } from "phosphor-react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBlog } from "../services/apiBlogs";
+import { useState } from "react";
+import axios from "axios";
+import { PaperPlaneRight, PencilSimple } from "phosphor-react";
+
+const api = "https://gemini-api.up.railway.app";
 
 function WriteBlog() {
   const { getCookie, user } = useAuth();
-  const navigate = useNavigate();
+  const [prompt, setPrompt] = useState("");
+  const [isGenerating, setGenerating] = useState(false);
 
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const {
@@ -18,12 +25,13 @@ function WriteBlog() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: createBlog,
     onSuccess: () => {
-      toast.success("New blog successfully created");
+      toast.success("New blog successfully created by AI");
       queryClient.invalidateQueries({ queryKey: ["getNewBlogs"] });
       queryClient.invalidateQueries({ queryKey: ["getAllBlogsTrending"] });
       navigate("/");
@@ -31,9 +39,30 @@ function WriteBlog() {
       reset();
     },
     onError: () => {
-      toast.error("Error creating Blog.");
+      toast.error("Error creating Blog");
     },
   });
+
+  async function apiData(prompt) {
+    try {
+      setGenerating(true);
+      const response = await axios.post(`${api}/generate-text`, { prompt });
+      console.log(response);
+      return response.data.generatedText.replace(/\*/g, "");
+    } catch (error) {
+      toast.error("Error ", error);
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  const handlePrompt = async () => {
+    if (!prompt) return;
+    const generatedContent = await apiData(prompt);
+    if (generatedContent) {
+      setValue("content", generatedContent);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -41,11 +70,13 @@ function WriteBlog() {
       const blogImage = featuredImage[0];
       const userId = user?._id;
       const token = getCookie("jwt");
+      const usedAI = true;
       const blogData = {
         data,
         userId,
         token,
         blogImage,
+        usedAI,
       };
       mutate({
         blogData,
@@ -55,8 +86,8 @@ function WriteBlog() {
     }
   };
 
-  const handleUsingAI = () => {
-    navigate(`/writeblog/minder`);
+  const handleWriteWithoutAI = () => {
+    navigate(`/writeblog`);
   };
 
   const categories = [
@@ -161,9 +192,18 @@ function WriteBlog() {
   return (
     <div className={styles.blogContainer}>
       <div className={styles.pageInfo}>
-        <p className={styles.author}>author : @{user?.username}</p>
-        <p className={styles.AItext} onClick={handleUsingAI}>
-          <Sparkle size={18} weight="bold" /> Use AI for Blog
+        <p className={styles.author}>
+          <span>author : @{user?.username}</span>
+          <span className={styles.noAI} onClick={handleWriteWithoutAI}>
+            <PencilSimple size={18} weight="bold" />
+            Write without AI
+          </span>
+          <span className={styles.AItext}>
+            <Sparkle size={18} weight="bold" /> You are using Minder AI
+          </span>
+        </p>
+        <p className={styles.notified}>
+          * Others will know that you have used AI
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -258,6 +298,23 @@ function WriteBlog() {
             {errors.description && errors.description.message}
           </p>
         </div>
+
+        <div className={`${styles.heading} ${styles.commonItem}`}>
+          <label>Create prompt for Content</label>
+          <textarea
+            value={prompt}
+            rows={2}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <p>{prompt.length}/100</p>
+          <span className={styles.sendPrompt} onClick={handlePrompt}>
+            <span>
+              {isGenerating ? "Generating... Please Wait" : "Send prompt"}
+            </span>
+            <PaperPlaneRight size={16} weight="bold" />
+          </span>
+        </div>
+
         <div className={`${styles.content} ${styles.commonItem}`}>
           <label>Write Content</label>
           <textarea
@@ -274,6 +331,7 @@ function WriteBlog() {
             })}
             rows={20}
           />
+
           <p className={styles.errorText}>
             {errors.content && errors.content.message}
           </p>

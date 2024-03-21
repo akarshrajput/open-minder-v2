@@ -1,14 +1,21 @@
-import { useAllBlogs } from "../context/blogsContext";
 import styles from "./GridBlogWideView.module.css";
 import Loader from "./Loader";
-import img from "./../img/default-user.jpg";
-import img1 from "./../img/blog-image.jpeg";
-import { ArrowElbowRightDown, CircleWavyCheck } from "phosphor-react";
+import { ArrowElbowRightDown, CircleWavyCheck, Sparkle } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
+import { getNewBlogs } from "./../services/apiBlogs";
+import { useQuery } from "@tanstack/react-query";
+import Error from "./Error";
 
 function GridBlogWideView() {
-  const { allBlogs, isLoading } = useAllBlogs();
-  // console.log(allBlogs);
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["getNewBlogs"],
+    queryFn: getNewBlogs,
+  });
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <>
       {isLoading ? (
@@ -17,7 +24,7 @@ function GridBlogWideView() {
         <>
           <Heading />
           <div className={styles.blogContainer}>
-            {allBlogs.map((blog) => (
+            {data?.data?.blogs.map((blog) => (
               <GridBlogItem blog={blog} key={blog.id} />
             ))}
           </div>
@@ -56,11 +63,13 @@ function GridBlogItem({ blog }) {
       <div className={styles.blogContent}>
         <div className={styles.authorInfo}>
           <div className={styles.nameCont}>
-            <img
-              className={styles.authorImage}
-              src={img}
-              alt={`${blog.author.name}'s profile of Open Minder`}
-            />
+            <div className={styles.photoContainer}>
+              <img
+                className={styles.userPhoto}
+                src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
+                alt={`${blog.author.name}'s profile`}
+              />
+            </div>
             <p className={styles.authorName} onClick={handleUserClick}>
               {blog.author.name}
             </p>
@@ -72,6 +81,13 @@ function GridBlogItem({ blog }) {
           </div>
           <p className={styles.autherUsername}>@{blog.author.username}</p>
           <p className={styles.blogDate}>{date}</p>
+          <p>
+            {blog.usedAI ? (
+              <Sparkle color="#9c36b5" size={18} weight="fill" />
+            ) : (
+              ""
+            )}
+          </p>
         </div>
         <div className={styles.blofInfo}>
           <p className={styles.blogHeading} onClick={handleBlogClick}>
@@ -89,8 +105,9 @@ function GridBlogItem({ blog }) {
       </div>
       <div className={styles.imageContainer}>
         <img
+          onClick={handleBlogClick}
           className={styles.blogImage}
-          src={img1}
+          src={blog?.featuredImage}
           alt={`Blog of ${blog.heading}`}
         />
       </div>

@@ -4,41 +4,45 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0 1rem;
+  padding: 0.4rem 0.6rem;
+  padding-right: 1rem !important;
   background-color: #f8f9fa;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  position: relative; /* Added position relative */
 }
 
 .search input {
-  font-size: 1.8rem;
-  width: 22rem;
-  font-size: 1.6rem;
-  font-weight: 500;
-  padding: 1.4rem 0rem;
-  background-color: #f8f9fa;
+  width: 34rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  padding: 1rem 0rem;
+  background-color: inherit;
+  padding-left: 1rem;
+  border-right: 1px solid #00000016;
+  position: relative;
+  color: #495057d4;
 }
 
 .searchContainer {
   position: absolute;
   top: 100%; /* Position it below the search box */
-  left: 0;
-  width: 50rem; /* Full width */
+  /* left: 4rem; */
+  width: 47rem; /* Full width */
   max-height: 20rem;
   overflow-y: auto; /* Add a scrollbar if content exceeds the container height */
   background-color: #f8faf8; /* Adjust background color */
   /* border: 1px solid #e9fac8; */
   border-radius: 1rem;
   padding: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .search input::placeholder {
   font-weight: 400;
-  color: #343a40;
+  color: #495057d4;
+  font-family: inherit;
 }
 
 .searchContainer ul {
@@ -55,7 +59,42 @@
   /* border: 2px solid #e8e6e6; */
   transition: background-color 0.3s ease;
 }
+.searchContainer ul li:nth-child(1) {
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: inherit;
+  cursor: default;
+}
+.searchContainer ul li:nth-child(1):hover {
+  background-color: inherit;
+}
 .searchContainer ul li:hover {
   background-color: #6567654c; /* Change the background color on hover */
 }
 /* Add any additional styles for the container and adjust as needed */
+.selectType {
+  font-size: 1.5rem;
+  padding: 0.8rem 1rem;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+  background-color: inherit;
+  border: 1px solid #00000013;
+  background-color: #e9ecefb3;
+  border-radius: 0.8rem;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #000000cd;
+  cursor: pointer;
+}
+.searchSubmit {
+  cursor: pointer;
+  /* background-color: #07a081; */
+  margin: 0.4rem;
+  color: #000;
+  transition: 0.3s all;
+}
+.searchSubmit:hover {
+  color: #07a081;
+}

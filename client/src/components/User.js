@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import styles from "./User.module.css";
 import { useEffect, useState } from "react";
-// import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import Loader from "./Loader";
 import { CircleWavyCheck } from "phosphor-react";
 
-const BASE_URL = "https://open-minder-v2.onrender.com";
+const BASE_URL = "http://localhost:3000";
 
 function User() {
   const [user, setUser] = useState({});
