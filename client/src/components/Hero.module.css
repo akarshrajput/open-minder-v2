@@ -2,8 +2,8 @@
   background-color: #fcc419;
   padding: 4rem 6rem;
   margin-bottom: 4rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
   /* border-radius: 1rem; */
   font-family: "Roboto Mono", monospace;
 }
@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: fit-content;
 }
 .docs {
   background-color: #343a40 !important;
@@ -43,9 +44,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: fit-content;
 }
 .writePaperAI {
   background: linear-gradient(to right bottom, #cc5de8, #845ef7);
+  width: fit-content;
 }
 .quotePara {
   font-size: 2.2rem;
@@ -91,4 +94,25 @@ button {
 .leaderBoardHeading {
   font-size: 1.6rem;
   font-weight: 400;
+}
+
+@media (max-width: 630px) {
+  .heroContainer {
+    padding: 4rem 4rem;
+  }
+  .quote {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .learnMinder {
+    font-size: 2.2rem;
+  }
+  .writePaper,
+  .docs,
+  .writePaperAI {
+    font-size: 1.6rem;
+  }
+  .quotePara {
+    font-size: 1.8rem;
+  }
 }

@@ -1,6 +1,7 @@
 .currentUserContainer {
   width: 120rem;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 .userInfo {
   display: flex;
@@ -114,4 +115,16 @@
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+@media (max-width: 1140px) {
+  .currentUserContainer {
+    width: 100%;
+  }
+  .userData {
+    grid-template-columns: 1fr;
+  }
+  .submit {
+    margin-bottom: 2rem;
+  }
 }

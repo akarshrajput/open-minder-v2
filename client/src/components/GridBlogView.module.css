@@ -94,3 +94,14 @@
   padding: 0.6rem;
   border-radius: 0.6rem;
 }
+
+@media (max-width: 1360px) {
+  .blogContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 570px) {
+  .blogContainer {
+    grid-template-columns: 1fr;
+  }
+}

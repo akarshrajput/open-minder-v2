@@ -53,3 +53,10 @@
 .copyright span {
   font-weight: 500;
 }
+
+@media (max-width: 470px) {
+  .fContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

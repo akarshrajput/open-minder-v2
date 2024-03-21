@@ -54,11 +54,6 @@ function Hero() {
           Start Reading
         </button>
       </div>
-      <div className={styles.leaderBoard}>
-        <p className={styles.leaderBoardHeading}>
-          {/* Top 5 writers <ArrowElbowRightDown size={20} weight="bold" /> */}
-        </p>
-      </div>
     </div>
   );
 }

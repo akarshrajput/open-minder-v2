@@ -45,3 +45,19 @@ option {
 .docs {
   margin-top: 7.6rem;
 }
+@media (max-width: 1510px) {
+  html {
+    font-size: 56%;
+  }
+}
+@media (max-width: 770px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    font-size: 45%;
+  }
+}

@@ -98,3 +98,13 @@
 .searchSubmit:hover {
   color: #07a081;
 }
+
+@media (max-width: 500px) {
+  .search input {
+    width: 20rem;
+    border-right: none;
+  }
+  .searchContainer {
+    width: 33rem;
+  }
+}

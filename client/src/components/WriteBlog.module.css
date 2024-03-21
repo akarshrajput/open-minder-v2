@@ -2,6 +2,7 @@
   width: 120rem;
   margin: 0 auto;
   margin-bottom: 10rem;
+  padding: 0 2rem;
 }
 .form {
   display: flex;
@@ -121,4 +122,15 @@
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+@media (max-width: 1130px) {
+  .blogInfo {
+    flex-direction: column;
+  }
+  .blogContainer {
+    width: 100%;
+  }
+  .pageInfo {
+    flex-direction: column;
+  }
 }

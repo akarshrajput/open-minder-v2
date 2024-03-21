@@ -1,7 +1,7 @@
 .blogWidth {
   width: 80rem;
   margin: 0 auto;
-  /* font-family: "Rubik", sans-serif; */
+  padding: 0rem 3rem;
 }
 .authorCategory {
   font-size: 1.6rem;
@@ -84,4 +84,9 @@
   /* font-weight: 500; */
   /* font-family: "Raleway", serif; */
   /* word-spacing: 0.5px; */
+}
+@media (max-width: 600px) {
+  .blogWidth {
+    width: 100%;
+  }
 }
