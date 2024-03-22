@@ -148,7 +148,7 @@ function CurrentUser() {
           <div className={`${styles.uBio} ${styles.commonUserData}`}>
             <label>Bio</label>
             <textarea
-              rows={4}
+              rows={8}
               type="text"
               id="bio"
               {...register("bio", {
