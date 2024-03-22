@@ -73,7 +73,7 @@ button {
   font-weight: 400;
   font-family: inherit;
   cursor: pointer;
-  border-radius: 1rem !important;
+  border-radius: 2rem !important;
 }
 .learnMinder {
   font-size: 4rem;

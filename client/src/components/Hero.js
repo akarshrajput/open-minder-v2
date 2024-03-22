@@ -49,7 +49,7 @@ function Hero() {
           <span>English Letter</span>
         </p>
         <button className={styles.button}>
-          <Book className="startReading" size={20} weight="bold" />
+          <Book className="startReading" weight="bold" />
           Start Reading
         </button>
       </div>

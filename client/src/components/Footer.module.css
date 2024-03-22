@@ -12,16 +12,15 @@
 .fContent {
   font-size: 1.3rem;
   display: flex;
-  gap: 1rem;
+  column-gap: 1rem;
   font-weight: 500;
   margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .fContent p {
   cursor: pointer;
   width: fit-content;
-  /* transition: all 0.3s; */
-  /* background-color: #e9ecef; */
-  /* color: #f1f3f5; */
   padding: 0.4rem 1.4rem;
   border-radius: 2rem;
 }
@@ -55,8 +54,8 @@
 }
 
 @media (max-width: 470px) {
-  .fContent {
+  /* .fContent {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
+  } */
 }

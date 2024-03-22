@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import styles from "./Login.module.css";
 
 function Signup() {
@@ -18,6 +19,8 @@ function Signup() {
     e.preventDefault();
     if (name && username && email && password && passwordConfirm) {
       signup(name, username, email, password, passwordConfirm);
+    } else {
+      toast.error("Please fill out all required fields");
     }
   }
 

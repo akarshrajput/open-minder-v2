@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import styles from "./Login.module.css";
 
 function Login() {
@@ -17,6 +18,8 @@ function Login() {
     const trimPassword = password.trim();
     if (trimUsername && trimPassword) {
       login(trimUsername, trimPassword);
+    } else {
+      toast.error("Please fill out all required fields");
     }
   }
 

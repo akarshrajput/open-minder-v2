@@ -83,7 +83,7 @@ function GridBlogItem({ blog }) {
           <p className={styles.blogDate}>{date}</p>
           <p>
             {blog.usedAI ? (
-              <Sparkle color="#9c36b5" size={18} weight="fill" />
+              <Sparkle color="#9c36b5" size={14} weight="fill" />
             ) : (
               ""
             )}
