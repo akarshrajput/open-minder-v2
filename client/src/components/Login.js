@@ -13,8 +13,10 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (username && password) {
-      login(username, password);
+    const trimUsername = username.trim();
+    const trimPassword = password.trim();
+    if (trimUsername && trimPassword) {
+      login(trimUsername, trimPassword);
     }
   }
 
@@ -38,6 +40,11 @@ function Login() {
   return (
     <div className={styles.login}>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1
+          style={{ textAlign: "center", fontWeight: 400, wordSpacing: "3px" }}
+        >
+          Login to OpenMinder
+        </h1>
         <div>
           <label>Username</label>
           <input

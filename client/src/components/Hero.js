@@ -22,23 +22,22 @@ function Hero() {
         <div className={styles.quote}>
           {/* <ArrowBendDownRight size={50} weight="bold" /> */}
           <button className={styles.writePaper}>
-            <Files size={20} weight="bold" />
+            <Files weight="bold" />
             Learn Minder
           </button>
-          <button onClick={handleWriteBlog} className={styles.docs}>
-            <Pen size={20} weight="bold" />
-            Write Blog
-          </button>
-
           <button
             onClick={handleWriteBlogUsingAI}
             className={styles.writePaperAI}
           >
-            <Sparkle size={20} weight="bold" />
+            <Sparkle className={styles.icon} weight="bold" />
             Use Minder AI
           </button>
+          <button onClick={handleWriteBlog} className={styles.docs}>
+            <Pen weight="bold" />
+            Write Blog
+          </button>
           <button className={styles.docs}>
-            <FileDoc size={20} weight="bold" />
+            <FileDoc weight="bold" />
             Create DOCS
           </button>
           {/* <ArrowBendRightDown size={50} weight="bold" /> */}

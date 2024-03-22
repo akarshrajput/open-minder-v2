@@ -14,6 +14,7 @@ import CurrentUserLayout from "./pages/CurrentUserLayout";
 import BlogWriteContainer from "./pages/BlogWriteContainer";
 import BlogWriteContainerAI from "./pages/BlogWriteContainerAI";
 import Docs from "./pages/Docs";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,16 +39,37 @@ function App() {
                 <Route path="/">
                   <Route path=":username/:id" element={<UserLayout />} />
                 </Route>
+                <>
+                  <Route
+                    path="/me/:username"
+                    element={
+                      <ProtectedRoute>
+                        <CurrentUserLayout />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/writeblog"
+                    element={
+                      <ProtectedRoute>
+                        <BlogWriteContainer />
+                      </ProtectedRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/writeblog/minder"
+                    element={
+                      <ProtectedRoute>
+                        <BlogWriteContainerAI />
+                      </ProtectedRoute>
+                    }
+                  />
+                </>
+                <Route path="/docs" element={<Docs />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Error />} />
-                <Route path="/me/:username" element={<CurrentUserLayout />} />
-                <Route path="/writeblog" element={<BlogWriteContainer />} />
-                <Route
-                  path="/writeblog/minder"
-                  element={<BlogWriteContainerAI />}
-                />
-                <Route path="/docs" element={<Docs />} />
               </Routes>
             </BrowserRouter>
           </BlogsProvider>

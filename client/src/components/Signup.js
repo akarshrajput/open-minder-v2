@@ -41,6 +41,11 @@ function Signup() {
   return (
     <div className={styles.login}>
       <form onSubmit={handleSubmit} className={styles.form}>
+        <h1
+          style={{ textAlign: "center", fontWeight: 400, wordSpacing: "3px" }}
+        >
+          Create new Account
+        </h1>
         <div>
           <label>Name</label>
           <input

@@ -109,11 +109,11 @@ function AuthProvider({ children }) {
           Date.now() + 7 * 24 * 60 * 60 * 1000
         ).toUTCString()}`;
       } else {
-        toast.success("Error Signin ", response.data.message);
-        console.error(response.data.message);
+        toast.error("Error Signin!");
+        // console.error(response.data.message);
       }
     } catch (err) {
-      console.log("Error: ", err);
+      toast.error(err?.response?.data?.message);
     }
   }
 
@@ -127,7 +127,7 @@ function AuthProvider({ children }) {
       if (response.data.status === "success") {
         const token = response.data.token;
         const user = response.data.data.user;
-        console.log(user);
+        // console.log(user);
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: { user },
@@ -137,11 +137,11 @@ function AuthProvider({ children }) {
           Date.now() + 7 * 24 * 60 * 60 * 1000
         ).toUTCString()}`;
       } else {
-        toast.success("Error Login ", response.data.message);
-        console.error(response.data.message);
+        toast.error("Error Login");
       }
     } catch (err) {
-      console.log("Error: ", err);
+      // console.log(err);
+      toast.error(err?.response?.data?.message);
     }
   }
 

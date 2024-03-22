@@ -118,3 +118,12 @@
     width: 29rem;
   }
 }
+@media (max-width: 345px) {
+  .search input {
+    width: 14rem;
+    border-right: none;
+  }
+  .searchContainer {
+    width: 26rem;
+  }
+}
