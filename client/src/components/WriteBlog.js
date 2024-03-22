@@ -224,8 +224,8 @@ function WriteBlog() {
             {...register("heading", {
               required: "This field is required.",
               minLength: {
-                value: 10,
-                message: "Heading must have at least 10 characters.",
+                value: 30,
+                message: "Heading must have at least 30 characters.",
               },
               maxLength: {
                 value: 100,
@@ -244,8 +244,8 @@ function WriteBlog() {
             {...register("description", {
               required: "This field is required.",
               minLength: {
-                value: 20,
-                message: "Descripton must have at least 20 characters.",
+                value: 50,
+                message: "Descripton must have at least 50 characters.",
               },
               maxLength: {
                 value: 300,
@@ -268,8 +268,8 @@ function WriteBlog() {
                 message: "Content must have at least 100 characters.",
               },
               maxLength: {
-                value: 20000,
-                message: "Content must not have more than 20,000 characters.",
+                value: 40000,
+                message: "Content must not have more than 40,000 characters.",
               },
             })}
             rows={20}
