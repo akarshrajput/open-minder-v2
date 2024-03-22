@@ -17,8 +17,9 @@
 .authorInfo {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  column-gap: 2rem;
   margin-bottom: 0.6rem;
+  flex-wrap: wrap;
 }
 .authorName {
   font-size: 1.5rem;
