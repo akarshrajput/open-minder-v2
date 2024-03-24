@@ -3,8 +3,10 @@ import Logo from "./Logo";
 import UserNav from "./UserNav";
 import styles from "./Header.module.css";
 import { useEffect, useState } from "react";
-
+import { useAuth } from "../context/AuthContext";
 function Header({ bg = "#fff" }) {
+  const { isLoading } = useAuth();
+
   const [scrollY, setScrollBg] = useState("");
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +31,7 @@ function Header({ bg = "#fff" }) {
           <Logo />
           <Search />
         </div>
-        <UserNav />
+        {isLoading ? "" : <UserNav />}
       </div>
     </div>
   );

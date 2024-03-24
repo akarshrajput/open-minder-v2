@@ -1,0 +1,131 @@
+.allDataContainer {
+  margin: 0 2rem 2rem 2rem;
+  padding: 2rem 0;
+}
+.shareContainer {
+  display: grid;
+  grid-template-columns: 50% 1fr auto;
+  gap: 2rem;
+}
+.shareContent {
+  background-color: rgb(246, 249, 249);
+  border-radius: 1rem;
+  border: 1px solid #e9ecef !important;
+}
+.shareHeading {
+  font-size: 1.4rem;
+}
+.commonInput {
+  /* background-color: rgb(248, 250, 252); */
+  /* border: 1px solid #e9ecef !important; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  padding: 1rem;
+}
+.label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  align-items: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.textarea {
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 1rem;
+  outline: none;
+  border-radius: 1rem;
+  border: none;
+  border: 1px solid #e9ecef !important;
+
+  resize: none;
+}
+.submitBtn {
+  padding: 0.4rem 1.6rem !important;
+  width: fit-content;
+  background-color: #51cf66 !important;
+  font-weight: 500;
+  border-radius: 0.6rem !important;
+}
+.minderHeading {
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.commonStudioData {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: #e9ecef;
+  padding: 0.2rem 1rem;
+  border-radius: 0.6rem;
+  width: fit-content;
+}
+.commonStudioData p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: inherit;
+  color: #495057;
+}
+.studioData {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.quote {
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.writePaper {
+  background: linear-gradient(to right bottom, #e64980, #fa5252);
+  border: none;
+  outline: none;
+  padding: 0.8rem 2rem !important;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 1rem !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+}
+.docs {
+  background-color: #343a40 !important;
+  border: none;
+  outline: none;
+  padding: 0.8rem 2rem !important;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 1rem !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+}
+.writePaperAI {
+  background: linear-gradient(to right bottom, #cc5de8, #845ef7);
+  width: fit-content;
+  font-size: 1.6rem;
+  font-weight: 400;
+  padding: 0.8rem 2rem !important;
+  border-radius: 1rem !important;
+}

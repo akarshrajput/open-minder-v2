@@ -9,6 +9,7 @@ const AuthContext = createContext();
 const initialState = {
   user: null,
   isAuthenticated: false,
+  isLoading: false,
 };
 
 function reducer(state, action) {
@@ -18,12 +19,14 @@ function reducer(state, action) {
         ...state,
         user: action.payload.user,
         isAuthenticated: true,
+        isLoading: false,
       };
     case "LOGIN_SUCCESS":
       return {
         ...state,
         user: action.payload.user,
         isAuthenticated: true,
+        isLoading: false,
       };
     case "LOGOUT_SUCCESS":
       return {
@@ -36,6 +39,12 @@ function reducer(state, action) {
         ...state,
         user: action.payload.user,
         isAuthenticated: true,
+        isLoading: false,
+      };
+    case "LOADING":
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
       };
     default:
       throw new Error("Unknown action");
@@ -43,7 +52,7 @@ function reducer(state, action) {
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, isLoading }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -53,6 +62,7 @@ function AuthProvider({ children }) {
       const token = getCookie("jwt");
       if (token) {
         try {
+          dispatch({ type: "LOADING", payload: { isLoading: true } });
           const response = await axios.get(`${BASE_URL}/api/v1/users/me`, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -77,9 +87,12 @@ function AuthProvider({ children }) {
           dispatch({ type: "LOGOUT_SUCCESS" });
           document.cookie =
             "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"; // Remove the invalid cookie
+        } finally {
+          dispatch({ type: "LOADING", payload: { isLoading: false } });
         }
       } else {
         // No token found, set isLoading to false
+        dispatch({ type: "LOADING", payload: { isLoading: false } });
         dispatch({ type: "LOGOUT_SUCCESS" });
       }
     }
@@ -89,6 +102,7 @@ function AuthProvider({ children }) {
 
   async function signup(name, username, email, password, passwordConfirm) {
     try {
+      dispatch({ type: "LOADING", payload: { isLoading: true } });
       const response = await axios.post(`${BASE_URL}/api/v1/users/signup`, {
         name,
         username,
@@ -110,15 +124,18 @@ function AuthProvider({ children }) {
         ).toUTCString()}`;
       } else {
         toast.error("Error Signin!");
-        // console.error(response.data.message);
+        dispatch({ type: "LOADING", payload: { isLoading: false } });
       }
     } catch (err) {
       toast.error(err?.response?.data?.message);
+    } finally {
+      dispatch({ type: "LOADING", payload: { isLoading: false } });
     }
   }
 
   async function login(username, password) {
     try {
+      dispatch({ type: "LOADING", payload: { isLoading: true } });
       const response = await axios.post(`${BASE_URL}/api/v1/users/login`, {
         username,
         password,
@@ -138,10 +155,12 @@ function AuthProvider({ children }) {
         ).toUTCString()}`;
       } else {
         toast.error("Error Login");
+        dispatch({ type: "LOADING", payload: { isLoading: false } });
       }
     } catch (err) {
-      // console.log(err);
       toast.error(err?.response?.data?.message);
+    } finally {
+      dispatch({ type: "LOADING", payload: { isLoading: false } });
     }
   }
 
@@ -171,6 +190,7 @@ function AuthProvider({ children }) {
         login,
         logout,
         getCookie,
+        isLoading,
       }}
     >
       {children}

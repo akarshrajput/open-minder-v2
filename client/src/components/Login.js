@@ -10,7 +10,7 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, isLoading } = useAuth();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -66,7 +66,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button>Login</button>
+        <button>{isLoading ? "Logging..." : "Login"}</button>
       </form>
       <p className={styles.para}>
         Don't have account? <span onClick={handleNavigateSignup}>SignUp</span>
