@@ -2,7 +2,9 @@ import axios from "axios";
 const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
 
 export async function getAllMemories() {
-  const { data, error } = await axios.get(`${BASE_URL}/api/v1/memories`);
+  const { data, error } = await axios.get(
+    `${BASE_URL}/api/v1/memories?limit=6`
+  );
   if (error) {
     console.error(error);
     throw new Error("Memories could not be loaded");
@@ -10,9 +12,9 @@ export async function getAllMemories() {
   return data;
 }
 
-export async function getAllMemoriesTrending() {
+export async function getCurrentUserMemories(authorId) {
   const { data, error } = await axios.get(
-    `${BASE_URL}/api/v1/memories?sort=-views&limit=8`
+    `${BASE_URL}/api/v1/memories?author=${authorId}&limit=4&sort=-createdAt`
   );
   if (error) {
     console.error(error);

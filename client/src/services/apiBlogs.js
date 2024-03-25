@@ -32,8 +32,10 @@ export async function getAllBlogsTrending() {
   return data;
 }
 
-export async function getNewBlogs() {
-  const { data, error } = await axios.get(`${BASE_URL}/api/v1/blogs?limit=24`);
+export async function getNewBlogs(page) {
+  const { data, error } = await axios.get(
+    `${BASE_URL}/api/v1/blogs?page=${page}&limit=10`
+  );
   if (error) {
     console.error(error);
     throw new Error("Blogs could not be loaded");

@@ -84,7 +84,7 @@
 .quote {
   font-family: "Rubik", sans-serif;
   font-weight: 500;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -128,4 +128,8 @@
   font-weight: 400;
   padding: 0.8rem 2rem !important;
   border-radius: 1rem !important;
+}
+.error {
+  font-size: 1.2rem;
+  color: #fa5252;
 }

@@ -279,7 +279,8 @@ function WriteBlog() {
           </p>
         </div>
         <button disabled={isLoading} type="submit">
-          <span>Post</span> <Upload size={18} weight="bold" />
+          <span>{isLoading ? "Posting" : "Post"}</span>{" "}
+          <Upload size={18} weight="bold" />
         </button>
       </form>
     </div>

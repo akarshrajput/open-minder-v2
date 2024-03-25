@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import { useMutation } from "@tanstack/react-query";
-import { createMemory } from "../services/apiMemories";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createMemory, getCurrentUserMemories } from "../services/apiMemories";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import styles from "./ShareMind.module.css";
@@ -17,14 +17,31 @@ import {
 } from "phosphor-react";
 
 function ShareMind() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { user, getCookie } = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
+  const userId = user?._id;
+
+  const { data: memoriesData } = useQuery({
+    queryKey: ["userMemories", userId],
+    queryFn: () => getCurrentUserMemories(userId),
+  });
+  const memories = memoriesData?.data?.memories;
+
+  const { mutate, isLoading: isLoadingSubmit } = useMutation({
     mutationFn: createMemory,
     onSuccess: () => {
       toast.success("New memory successfully created");
+      reset();
+      queryClient.invalidateQueries({ queryKey: ["userMemories"] });
+      queryClient.invalidateQueries({ queryKey: ["getAllMemories"] });
     },
     onError: () => {
       toast.error("Error creating memory");
@@ -72,13 +89,16 @@ function ShareMind() {
                 {...register("content", {
                   required: "Memory should have content",
                   maxLength: {
-                    value: 200,
-                    message: "Memory must not have more than 200 characters",
+                    value: 100,
+                    message: "Memory must not have more than 100 characters",
                   },
                 })}
               />
+              <p className={styles.error}>
+                {errors.content && errors.content.message}
+              </p>
               <button className={styles.submitBtn}>
-                {isLoading ? "Sharing..." : "Share"}
+                {isLoadingSubmit ? "Sharing..." : "Share"}
                 <CirclesThree />
               </button>
             </div>
@@ -94,9 +114,22 @@ function ShareMind() {
                 </p>
 
                 <div className={styles.studioData}>
-                  <div className={styles.commonStudioData}>
-                    <label>Nothing...</label>
-                  </div>
+                  {memories?.length === 0 ? (
+                    <div className={styles.commonStudioData}>
+                      <label>Nothing</label>
+                    </div>
+                  ) : memories ? (
+                    memories.map((memory) => (
+                      <CurrentUserMemories
+                        memory={memory}
+                        key={memory?.memory?._id}
+                      />
+                    ))
+                  ) : (
+                    <div className={styles.commonStudioData}>
+                      <label>...</label>
+                    </div>
+                  )}
                 </div>
               </div>
             </form>
@@ -155,6 +188,16 @@ function ShareMind() {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function CurrentUserMemories(memory) {
+  const memoryContent = memory?.memory?.content.slice(0, 100);
+  // console.log(memory?.memory?._id);
+  return (
+    <div className={styles.commonStudioData}>
+      <label>{memoryContent}</label>
     </div>
   );
 }

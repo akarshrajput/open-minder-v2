@@ -5,32 +5,50 @@ import { useNavigate } from "react-router-dom";
 import { getNewBlogs } from "./../services/apiBlogs";
 import { useQuery } from "@tanstack/react-query";
 import Error from "./Error";
+import { useState, useEffect } from "react";
 
 function GridBlogWideView() {
+  const [blogs, setBlogs] = useState([]);
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+
   const { isLoading, data, error } = useQuery({
-    queryKey: ["getNewBlogs"],
-    queryFn: getNewBlogs,
+    queryKey: ["getNewBlogs", page],
+    queryFn: () => getNewBlogs(page),
   });
+
+  useEffect(() => {
+    if (data) {
+      const updatedBlogs = data?.data?.blogs;
+      setBlogs((prevBlogs) => [...prevBlogs, ...updatedBlogs]);
+    }
+  }, [data]);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
 
   if (error) {
     return <Error />;
   }
 
+  if (isLoading && !blogs.length) {
+    return <Loader />;
+  }
+
   return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Heading />
-          <div className={styles.blogContainer}>
-            {data?.data?.blogs.map((blog) => (
-              <GridBlogItem blog={blog} key={blog.id} />
-            ))}
-          </div>
-        </>
-      )}
-    </>
+    <div className={styles.blogFlexContainer}>
+      <Heading />
+      <div className={styles.blogContainer}>
+        {blogs.map((blog) => (
+          <GridBlogItem blog={blog} key={blog.id} navigate={navigate} />
+        ))}
+      </div>
+
+      <p onClick={handleLoadMore} className={styles.loadMore}>
+        {isLoading ? "Loading" : "Load More"}
+      </p>
+    </div>
   );
 }
 
@@ -43,17 +61,16 @@ function Heading() {
   );
 }
 
-function GridBlogItem({ blog }) {
+function GridBlogItem({ blog, navigate }) {
   const blogHeading = blog.heading.slice(0, 30) + " ...";
   const blogDescription = blog.description.slice(0, 200) + " ...";
   const tags = "#" + blog.tags.join(" #");
   const date = blog.createdAt.split("T")[0];
-  const navigate = useNavigate();
 
   const handleBlogClick = () => {
-    // Use the navigate function to redirect to the specific blog with its id
     navigate(`/en-us/blog/${blog.id}`);
   };
+
   const handleUserClick = () => {
     navigate(`/${blog.author.username}/${blog.author._id}`);
   };
@@ -73,21 +90,13 @@ function GridBlogItem({ blog }) {
             <p className={styles.authorName} onClick={handleUserClick}>
               {blog.author.name}
             </p>
-            {blog.author.verified ? (
+            {blog.author.verified && (
               <CircleWavyCheck size={16} weight="fill" color="#339af0" />
-            ) : (
-              ""
             )}
           </div>
           <p className={styles.autherUsername}>@{blog.author.username}</p>
           <p className={styles.blogDate}>{date}</p>
-          <p>
-            {blog.usedAI ? (
-              <Sparkle color="#9c36b5" size={14} weight="fill" />
-            ) : (
-              ""
-            )}
-          </p>
+          {blog.usedAI && <Sparkle color="#9c36b5" size={14} weight="fill" />}
         </div>
         <div className={styles.blofInfo}>
           <p className={styles.blogHeading} onClick={handleBlogClick}>
