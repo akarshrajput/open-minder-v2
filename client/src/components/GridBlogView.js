@@ -1,6 +1,11 @@
 import styles from "./GridBlogView.module.css";
 import Loader from "./Loader";
-import { ArrowElbowRightDown, CircleWavyCheck, Sparkle } from "phosphor-react";
+import {
+  ArrowElbowRightDown,
+  CircleWavyCheck,
+  Sparkle,
+  Plus,
+} from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getAllBlogsTrending } from "../services/apiBlogs";
@@ -83,6 +88,10 @@ function GridBlogItem({ blog }) {
           ) : (
             ""
           )}
+        </p>
+        <p className={styles.follow}>
+          Follow
+          <Plus weight="bold" />
         </p>
       </div>
       <div className={styles.blofInfo}>

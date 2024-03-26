@@ -1,6 +1,11 @@
 import styles from "./GridBlogWideView.module.css";
 import Loader from "./Loader";
-import { ArrowElbowRightDown, CircleWavyCheck, Sparkle } from "phosphor-react";
+import {
+  ArrowElbowRightDown,
+  CircleWavyCheck,
+  Sparkle,
+  Plus,
+} from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { getNewBlogs } from "./../services/apiBlogs";
 import { useQuery } from "@tanstack/react-query";
@@ -94,9 +99,13 @@ function GridBlogItem({ blog, navigate }) {
               <CircleWavyCheck size={16} weight="fill" color="#339af0" />
             )}
           </div>
-          <p className={styles.autherUsername}>@{blog.author.username}</p>
+
           <p className={styles.blogDate}>{date}</p>
           {blog.usedAI && <Sparkle color="#9c36b5" size={14} weight="fill" />}
+          <p className={styles.follow}>
+            Follow
+            <Plus weight="bold" />
+          </p>
         </div>
         <div className={styles.blofInfo}>
           <p className={styles.blogHeading} onClick={handleBlogClick}>

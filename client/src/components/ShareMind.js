@@ -81,6 +81,7 @@ function ShareMind() {
             <div className={styles.commonInput}>
               <label className={styles.label}>
                 Share your daily thoughts <Lightbulb weight="bold" />
+                <p className={styles.usernameText}>@{user?.username}</p>
               </label>
               <textarea
                 className={styles.textarea}

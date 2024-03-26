@@ -133,3 +133,20 @@
   font-size: 1.2rem;
   color: #fa5252;
 }
+.usernameText {
+  color: #1971c2;
+  background-color: #e7f5ff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1000px) {
+  .shareContainer {
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+  }
+  .shareContent {
+    grid-column: 1/-1;
+  }
+}

@@ -95,6 +95,15 @@
   padding: 0.6rem;
   border-radius: 0.6rem;
 }
+.follow {
+  color: #228be6;
+  font-size: 1.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #e7f5ff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 2rem;
+}
 
 @media (max-width: 1360px) {
   .blogContainer {

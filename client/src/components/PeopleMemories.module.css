@@ -45,3 +45,16 @@
   padding: 0.4rem 1rem;
   width: fit-content;
 }
+
+@media (max-width: 1300px) {
+  .memoriesContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 2rem;
+  }
+}
+@media (max-width: 550px) {
+  .memoriesContainer {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2rem;
+  }
+}
