@@ -109,7 +109,7 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  border-radius: 1rem !important;
+  border-radius: 0.6rem !important;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -124,7 +124,7 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  border-radius: 1rem !important;
+  border-radius: 0.6rem !important;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -136,7 +136,15 @@
   font-size: 1.6rem;
   font-weight: 500;
   padding: 0.6rem 2rem !important;
-  border-radius: 1rem !important;
+  border-radius: 0.6rem !important;
+}
+.notes {
+  background: linear-gradient(to right bottom, #fd7e14, #fab005);
+  width: fit-content;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 0.6rem 2rem !important;
+  border-radius: 0.6rem !important;
 }
 .error {
   font-size: 1.2rem;

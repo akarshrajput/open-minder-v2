@@ -15,6 +15,7 @@ import {
   Pen,
   FileDoc,
 } from "phosphor-react";
+import { getCurrentUserBlogs } from "../services/apiBlogs";
 
 function ShareMind() {
   const {
@@ -34,6 +35,18 @@ function ShareMind() {
     queryFn: () => getCurrentUserMemories(userId),
   });
   const memories = memoriesData?.data?.memories;
+
+  const { data: currentUserBlogs } = useQuery({
+    queryKey: ["currentUserBlogs", userId],
+    queryFn: () => getCurrentUserBlogs(userId),
+  });
+
+  const numberOfBlogs = currentUserBlogs?.data?.blogs?.length;
+  const numberOfThoughts = memoriesData?.data?.memories?.length;
+
+  const currentUserScore = (numberOfBlogs / 3 + numberOfThoughts / 20).toFixed(
+    2
+  );
 
   const { mutate, isLoading: isLoadingSubmit } = useMutation({
     mutationFn: createMemory,
@@ -148,18 +161,18 @@ function ShareMind() {
                 <div className={styles.studioData}>
                   <div className={styles.commonMinderData}>
                     <label>Minder score</label>
-                    <p>NULL</p>
+                    <p>{currentUserScore ? currentUserScore : "..."}</p>
                   </div>
                   <div className={styles.commonMinderData}>
-                    <label>Total Minder</label>
-                    <p>NULL</p>
+                    <label>Total minder</label>
+                    <p>{numberOfBlogs ? numberOfBlogs : "..."}</p>
                   </div>
                   <div className={styles.commonMinderData}>
                     <label>Total thoughts</label>
-                    <p>{memories?.length}</p>
+                    <p>{numberOfThoughts ? numberOfThoughts : "..."}</p>
                   </div>
                   <div className={styles.commonMinderData}>
-                    <label>Total Minder</label>
+                    <label>Total profit</label>
                     <p>NULL</p>
                   </div>
                 </div>
@@ -186,6 +199,9 @@ function ShareMind() {
           </button>
           <button className={styles.docs}>
             Create docs <FileDoc weight="bold" />
+          </button>
+          <button className={styles.notes}>
+            Create notes <FileDoc weight="bold" />
           </button>
         </div>
       </div>
