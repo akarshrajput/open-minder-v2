@@ -4,12 +4,16 @@ import { useAuth } from "../context/AuthContext";
 import styles from "./CurrentUser.module.css";
 import { useForm } from "react-hook-form";
 import { updateUserData, updateUserPhoto } from "../services/apiUser";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { getCurrentUserBlogs } from "../services/apiBlogs";
+import {
+  deleteCurrentUserBlog,
+  getCurrentUserBlogs,
+} from "../services/apiBlogs";
 import { ArrowDown } from "phosphor-react";
 
 function CurrentUser() {
+  const queryClient = useQueryClient();
   const { user, logout, getCookie } = useAuth();
   const navigate = useNavigate();
 
@@ -31,7 +35,6 @@ function CurrentUser() {
   });
 
   const allCurrentUserBlogs = currentUserBlogs?.data?.blogs;
-  console.log(allCurrentUserBlogs);
 
   const { mutate: mutateData } = useMutation({
     mutationFn: updateUserData,
@@ -40,6 +43,17 @@ function CurrentUser() {
     },
     onError: () => {
       toast.error("Error Updating data");
+    },
+  });
+
+  const { mutate: deleteBlog } = useMutation({
+    mutationFn: deleteCurrentUserBlog,
+    onSuccess: () => {
+      toast.success("Blog deleted");
+      queryClient.invalidateQueries({ queryKey: ["currentUserBlogs"] });
+    },
+    onError: () => {
+      toast.error("Blog not deleted");
     },
   });
 
@@ -184,7 +198,12 @@ function CurrentUser() {
         <div className={styles.currentBlogContainer}>
           {allCurrentUserBlogs &&
             allCurrentUserBlogs.map((blog) => (
-              <CurrentUserBlogs blog={blog} key={blog._id} />
+              <CurrentUserBlogs
+                blog={blog}
+                deleteBlog={deleteBlog}
+                getCookie={getCookie}
+                key={blog._id}
+              />
             ))}
         </div>
       </div>
@@ -192,16 +211,26 @@ function CurrentUser() {
   );
 }
 
-function CurrentUserBlogs({ blog }) {
-  console.log(blog);
+function CurrentUserBlogs({ blog, deleteBlog, getCookie }) {
+  const handleDeleteBlog = () => {
+    const token = getCookie("jwt");
+    const blogId = blog._id;
+    const data = { token, blogId };
+    deleteBlog(data);
+  };
+
   const blogHeading = blog.heading.slice(0, 60);
   return (
     <div className={styles.currentUserBlogs}>
-      <p className={styles.currentArticleId}>ID : {blog?._id}</p>
-      <p className={styles.currentArticleHeading}>
-        {blog.heading.length > 60 ? `${blogHeading} ...` : `${blogHeading}`}
+      <div>
+        <p className={styles.currentArticleId}>ID : {blog?._id}</p>
+        <p className={styles.currentArticleHeading}>
+          {blog.heading.length > 60 ? `${blogHeading} ...` : `${blogHeading}`}
+        </p>
+      </div>
+      <p onClick={handleDeleteBlog} className={styles.deleteBlog}>
+        Delete
       </p>
-      <p className={styles.deleteBlog}>Delete</p>
     </div>
   );
 }
