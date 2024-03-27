@@ -24,10 +24,11 @@
   font-weight: 500;
 }
 .blogHeading {
-  font-size: 4.4rem;
-  font-weight: 500;
+  font-size: 5rem;
+  font-weight: 700;
   margin-bottom: 1rem;
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
+  font-family: "Roboto Serif", serif;
 }
 .tags {
   font-size: 1.4rem;

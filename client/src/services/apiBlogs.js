@@ -24,7 +24,9 @@ export async function getSearchBlogs(heading) {
 }
 
 export async function getAllBlogsTrending() {
-  const { data, error } = await axios.get(`${BASE_URL}/api/v1/blogs?limit=4`);
+  const { data, error } = await axios.get(
+    `${BASE_URL}/api/v1/blogs?limit=4&sort=-views`
+  );
   if (error) {
     console.error(error);
     throw new Error("Blogs could not be loaded");

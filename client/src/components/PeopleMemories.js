@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllMemories } from "../services/apiMemories";
 import Loader from "./Loader";
 import styles from "./PeopleMemories.module.css";
-import { CircleWavyCheck, DotsThreeOutline } from "phosphor-react";
+import { DotsThreeOutline, Bell } from "phosphor-react";
 
 function PeopleMemories() {
   const { isLoading, data } = useQuery({
@@ -33,12 +33,13 @@ function Memory({ memory }) {
     <div className={styles.memoryData}>
       <p className={styles.memoryContent}>{memory?.content}</p>
       <div className={styles.memoryAuthor}>
-        <p>{memory.author.name}</p>
-        {memory.author.verified ? (
+        <Bell weight="bold" />
+        <p> {memory.author.name}</p>
+        {/* {memory.author.verified ? (
           <CircleWavyCheck weight="fill" color="#339af0" />
         ) : (
           ""
-        )}
+        )} */}
       </div>
     </div>
   );

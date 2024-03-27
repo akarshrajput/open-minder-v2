@@ -146,19 +146,19 @@ function ShareMind() {
                 </p>
 
                 <div className={styles.studioData}>
-                  <div className={styles.commonStudioData}>
+                  <div className={styles.commonMinderData}>
                     <label>Minder score</label>
                     <p>NULL</p>
                   </div>
-                  <div className={styles.commonStudioData}>
+                  <div className={styles.commonMinderData}>
                     <label>Total Minder</label>
                     <p>NULL</p>
                   </div>
-                  <div className={styles.commonStudioData}>
+                  <div className={styles.commonMinderData}>
                     <label>Total thoughts</label>
                     <p>{memories?.length}</p>
                   </div>
-                  <div className={styles.commonStudioData}>
+                  <div className={styles.commonMinderData}>
                     <label>Total Minder</label>
                     <p>NULL</p>
                   </div>
@@ -185,7 +185,7 @@ function ShareMind() {
             Write Blog <Pen weight="bold" />
           </button>
           <button className={styles.docs}>
-            Create DOCS <FileDoc weight="bold" />
+            Create docs <FileDoc weight="bold" />
           </button>
         </div>
       </div>
