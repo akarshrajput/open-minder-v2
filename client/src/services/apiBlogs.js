@@ -34,7 +34,7 @@ export async function getAllBlogsTrending() {
 
 export async function getNewBlogs(page) {
   const { data, error } = await axios.get(
-    `${BASE_URL}/api/v1/blogs?page=${page}&limit=10`
+    `${BASE_URL}/api/v1/blogs?page=${page}&limit=40`
   );
   if (error) {
     console.error(error);
