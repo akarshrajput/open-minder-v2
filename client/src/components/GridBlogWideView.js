@@ -83,25 +83,27 @@ function GridBlogItem({ blog, navigate }) {
   return (
     <div className={styles.blogItem}>
       <div className={styles.blogContent}>
-        <div className={styles.authorInfo}>
-          <div className={styles.nameCont}>
-            <div className={styles.photoContainer}>
-              <img
-                className={styles.userPhoto}
-                src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
-                alt={`${blog.author.name}'s profile`}
-              />
+        <div className={styles.authorInfoContainer}>
+          <div className={styles.authorInfo}>
+            <div className={styles.nameCont}>
+              <div className={styles.photoContainer}>
+                <img
+                  className={styles.userPhoto}
+                  src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
+                  alt={`${blog.author.name}'s profile`}
+                />
+              </div>
+              <p className={styles.authorName} onClick={handleUserClick}>
+                {blog.author.name}
+              </p>
+              {blog.author.verified && (
+                <CircleWavyCheck size={16} weight="fill" color="#339af0" />
+              )}
             </div>
-            <p className={styles.authorName} onClick={handleUserClick}>
-              {blog.author.name}
-            </p>
-            {blog.author.verified && (
-              <CircleWavyCheck size={16} weight="fill" color="#339af0" />
-            )}
-          </div>
 
-          <p className={styles.blogDate}>{date}</p>
-          {blog.usedAI && <Sparkle color="#9c36b5" size={14} weight="fill" />}
+            <p className={styles.blogDate}>{date}</p>
+            {blog.usedAI && <Sparkle color="#9c36b5" size={14} weight="fill" />}
+          </div>
           <p className={styles.follow}>
             Follow
             <Plus weight="bold" />

@@ -156,7 +156,7 @@ function ShareMind() {
                   </div>
                   <div className={styles.commonStudioData}>
                     <label>Total thoughts</label>
-                    <p>NULL</p>
+                    <p>{memories?.length}</p>
                   </div>
                   <div className={styles.commonStudioData}>
                     <label>Total Minder</label>

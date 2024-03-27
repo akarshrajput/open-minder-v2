@@ -197,7 +197,7 @@ function CurrentUserBlogs({ blog }) {
   const blogHeading = blog.heading.slice(0, 60);
   return (
     <div className={styles.currentUserBlogs}>
-      <p className={styles.currentArticleId}>Blog ID - {blog?._id}</p>
+      <p className={styles.currentArticleId}>ID : {blog?._id}</p>
       <p className={styles.currentArticleHeading}>
         {blog.heading.length > 60 ? `${blogHeading} ...` : `${blogHeading}`}
       </p>

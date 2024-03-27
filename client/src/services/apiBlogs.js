@@ -54,6 +54,17 @@ export async function getCurrentUserBlogs(authorId) {
   return data;
 }
 
+export async function deleteCurrentUserBlog(blogId) {
+  const { data, error } = await axios.delete(
+    `${BASE_URL}/api/v1/blogs/${blogId}`
+  );
+  if (error) {
+    console.error(error);
+    throw new Error("Blog could not be deleted");
+  }
+  return data;
+}
+
 export async function getBlog(id) {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/blogs/${id}`);

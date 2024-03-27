@@ -65,30 +65,32 @@ function GridBlogItem({ blog }) {
   };
   return (
     <div className={styles.blogItem}>
-      <div className={styles.authorInfo}>
-        <div className={styles.photoContainer}>
-          <img
-            className={styles.userPhoto}
-            src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
-            alt={`${blog.author.name}'s profile`}
-          />
-        </div>
-        <p className={styles.authorName} onClick={handleUserClick}>
-          {blog.author.name}
-        </p>
-        {blog.author.verified ? (
-          <CircleWavyCheck size={16} weight="fill" color="#339af0" />
-        ) : (
-          ""
-        )}
-        {/* <p className={styles.autherUsername}>@{blog.author.username}</p> */}
-        <p>
-          {blog.usedAI ? (
-            <Sparkle color="#9c36b5" size={14} weight="fill" />
+      <div className={styles.authorInfoContainer}>
+        <div className={styles.authorInfo}>
+          <div className={styles.photoContainer}>
+            <img
+              className={styles.userPhoto}
+              src={`https://levtozcwxamsnighgjbp.supabase.co/storage/v1/object/public/user-photo/${blog?.author?.photo}`}
+              alt={`${blog.author.name}'s profile`}
+            />
+          </div>
+          <p className={styles.authorName} onClick={handleUserClick}>
+            {blog.author.name}
+          </p>
+          {blog.author.verified ? (
+            <CircleWavyCheck size={16} weight="fill" color="#339af0" />
           ) : (
             ""
           )}
-        </p>
+          {/* <p className={styles.autherUsername}>@{blog.author.username}</p> */}
+          <p>
+            {blog.usedAI ? (
+              <Sparkle color="#9c36b5" size={14} weight="fill" />
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
         <p className={styles.follow}>
           Follow
           <Plus weight="bold" />

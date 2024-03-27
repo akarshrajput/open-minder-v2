@@ -17,11 +17,16 @@
   grid-template-columns: 70% 30%;
   gap: 1rem;
 }
+.authorInfoContainer {
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .authorInfo {
   display: flex;
   align-items: center;
   column-gap: 2rem;
-  margin-bottom: 0.6rem;
   flex-wrap: wrap;
 }
 .authorName {
