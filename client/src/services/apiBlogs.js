@@ -43,6 +43,17 @@ export async function getNewBlogs(page) {
   return data;
 }
 
+export async function getCurrentUserBlogs(authorId) {
+  const { data, error } = await axios.get(
+    `${BASE_URL}/api/v1/blogs?author=${authorId}&sort=-createdAt`
+  );
+  if (error) {
+    console.error(error);
+    throw new Error("Memories could not be loaded");
+  }
+  return data;
+}
+
 export async function getBlog(id) {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/blogs/${id}`);

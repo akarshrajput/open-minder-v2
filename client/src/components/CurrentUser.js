@@ -4,8 +4,10 @@ import { useAuth } from "../context/AuthContext";
 import styles from "./CurrentUser.module.css";
 import { useForm } from "react-hook-form";
 import { updateUserData, updateUserPhoto } from "../services/apiUser";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { getCurrentUserBlogs } from "../services/apiBlogs";
+import { ArrowDown } from "phosphor-react";
 
 function CurrentUser() {
   const { user, logout, getCookie } = useAuth();
@@ -20,6 +22,16 @@ function CurrentUser() {
     setValue,
     formState: { errors },
   } = useForm();
+
+  const userId = user?._id;
+
+  const { data: currentUserBlogs } = useQuery({
+    queryKey: ["currentUserBlogs", userId],
+    queryFn: () => getCurrentUserBlogs(userId),
+  });
+
+  const allCurrentUserBlogs = currentUserBlogs?.data?.blogs;
+  console.log(allCurrentUserBlogs);
 
   const { mutate: mutateData } = useMutation({
     mutationFn: updateUserData,
@@ -165,6 +177,31 @@ function CurrentUser() {
           </button>
         </form>
       </div>
+      <div>
+        <p className={styles.currentArticleQuote}>
+          Your all articles <ArrowDown weight="bold" />
+        </p>
+        <div className={styles.currentBlogContainer}>
+          {allCurrentUserBlogs &&
+            allCurrentUserBlogs.map((blog) => (
+              <CurrentUserBlogs blog={blog} key={blog._id} />
+            ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CurrentUserBlogs({ blog }) {
+  console.log(blog);
+  const blogHeading = blog.heading.slice(0, 60);
+  return (
+    <div className={styles.currentUserBlogs}>
+      <p className={styles.currentArticleId}>Blog ID - {blog?._id}</p>
+      <p className={styles.currentArticleHeading}>
+        {blog.heading.length > 60 ? `${blogHeading} ...` : `${blogHeading}`}
+      </p>
+      <p className={styles.deleteBlog}>Delete</p>
     </div>
   );
 }
