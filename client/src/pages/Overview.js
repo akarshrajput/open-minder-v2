@@ -14,7 +14,6 @@ function Overview() {
     <div className="overview">
       <Header bg={isLoading ? "#fff" : isAuthenticated ? "#fff" : "#fcc419"} />
       {isLoading ? <Loader /> : isAuthenticated ? <ShareMind /> : <Hero />}
-      {/* <Hero /> */}
       <PeopleMemories />
       <GridBlogView />
       <GridBlogWideView />
