@@ -7,9 +7,13 @@ import {
   Plus,
 } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { getAllBlogsTrending } from "../services/apiBlogs";
 import Error from "./Error";
+import { followUser } from "../services/apiUser";
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 
 function GridBlogView() {
   const { isLoading, data, isError } = useQuery({
@@ -49,12 +53,24 @@ function Heading() {
 }
 
 function GridBlogItem({ blog }) {
+  const { user, getCookie } = useAuth();
   const blogHeading = blog.heading.slice(0, 30) + " ...";
   const blogDescription = blog.description.slice(0, 200) + " ...";
   const tags = "#" + blog.tags.join(" #");
   const date = blog.createdAt.split("T")[0];
+  const [isFollow, setIsFollow] = useState(false);
 
   const navigate = useNavigate();
+
+  const { mutate: mutateUser, isLoading: isLoadingUserMutation } = useMutation({
+    mutationFn: followUser,
+    onSuccess: () => {
+      toast.success("Followed User successfully");
+    },
+    onError: () => {
+      toast.error("Error following user");
+    },
+  });
 
   const handleBlogClick = () => {
     // Use the navigate function to redirect to the specific blog with its id
@@ -63,6 +79,24 @@ function GridBlogItem({ blog }) {
   const handleUserClick = () => {
     navigate(`/${blog.author.username}/${blog.author._id}`);
   };
+
+  const handleFollowUser = () => {
+    const userId = blog.author._id;
+    const token = getCookie("jwt");
+    const userData = { token, userId };
+    mutateUser(userData);
+    setIsFollow(true);
+  };
+  console.log(blog.author);
+  console.log(user?._id);
+
+  let followText;
+  if (blog?.author.followers.includes(user?._id)) {
+    followText = true;
+  } else {
+    followText = false;
+  }
+
   return (
     <div className={styles.blogItem}>
       <div className={styles.authorInfoContainer}>
@@ -91,9 +125,9 @@ function GridBlogItem({ blog }) {
             )}
           </p>
         </div>
-        <p className={styles.follow}>
-          Follow
-          <Plus weight="bold" />
+        <p onClick={handleFollowUser} className={styles.follow}>
+          {isFollow ? "Following" : followText ? "Following" : "Follow"}
+          {!isFollow && !followText && <Plus weight="bold" />}
         </p>
       </div>
       <div className={styles.blofInfo}>

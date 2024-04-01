@@ -1,7 +1,7 @@
 import axios from "axios";
 import supabase from "./supabase";
 
-const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
+const BASE_URL = "http://localhost:3000";
 // const supabaseURL = "https://levtozcwxamsnighgjbp.supabase.co";
 
 export async function updateUserData(data) {
@@ -25,7 +25,31 @@ export async function updateUserData(data) {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Blog could not be loaded");
+    throw new Error("user cannot be updated");
+  }
+}
+
+export async function followUser(userData) {
+  try {
+    const token = userData?.token;
+    const userId = userData?.userId;
+    console.log(token);
+    console.log(userId);
+    const response = await axios.post(
+      `${BASE_URL}/api/v1/users/follow`,
+      {
+        userId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+    throw new Error("User cannot be followed");
   }
 }
 
