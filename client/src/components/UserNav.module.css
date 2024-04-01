@@ -57,3 +57,10 @@
   gap: 0.4rem;
   padding: 0.7rem 1.2rem !important;
 }
+.notification {
+  background-color: #d3f9d8;
+  padding: 1rem;
+  width: 4rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}

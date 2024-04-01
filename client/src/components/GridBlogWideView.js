@@ -8,9 +8,12 @@ import {
 } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { getNewBlogs } from "./../services/apiBlogs";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import Error from "./Error";
 import { useState, useEffect } from "react";
+import { followUser } from "../services/apiUser";
+import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 function GridBlogWideView() {
   const [blogs, setBlogs] = useState([]);
@@ -71,6 +74,8 @@ function GridBlogItem({ blog, navigate }) {
   const blogDescription = blog.description.slice(0, 200) + " ...";
   const tags = "#" + blog.tags.join(" #");
   const date = blog.createdAt.split("T")[0];
+  const [isFollow, setIsFollow] = useState(false);
+  const { user, getCookie } = useAuth();
 
   const handleBlogClick = () => {
     navigate(`/en-us/blog/${blog.id}`);
@@ -79,6 +84,38 @@ function GridBlogItem({ blog, navigate }) {
   const handleUserClick = () => {
     navigate(`/${blog.author.username}/${blog.author._id}`);
   };
+
+  const { mutate: mutateUser } = useMutation({
+    mutationFn: followUser,
+    onSuccess: () => {
+      toast.success("Followed User successfully");
+    },
+    onError: () => {
+      toast.error("Error following user");
+    },
+  });
+
+  const handleFollowUser = () => {
+    const userId = blog.author._id;
+    const token = getCookie("jwt");
+    const userData = { token, userId };
+    mutateUser(userData);
+    setIsFollow(true);
+  };
+
+  let followText;
+  if (blog?.author.followers.includes(user?._id)) {
+    followText = true;
+  } else {
+    followText = false;
+  }
+
+  let showFollow;
+  if (user?._id === blog?.author?._id) {
+    showFollow = false;
+  } else {
+    showFollow = true;
+  }
 
   return (
     <div className={styles.blogItem}>
@@ -104,9 +141,17 @@ function GridBlogItem({ blog, navigate }) {
             <p className={styles.blogDate}>{date}</p>
             {blog.usedAI && <Sparkle color="#9c36b5" size={14} weight="fill" />}
           </div>
-          <p className={styles.follow}>
-            Follow
-            <Plus weight="bold" />
+          <p onClick={handleFollowUser} className={styles.follow}>
+            {showFollow
+              ? isFollow
+                ? "Following"
+                : followText
+                ? "Following"
+                : "Follow"
+              : ""}
+            {showFollow
+              ? !isFollow && !followText && <Plus weight="bold" />
+              : ""}
           </p>
         </div>
         <div className={styles.blofInfo}>

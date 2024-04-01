@@ -62,7 +62,7 @@ function GridBlogItem({ blog }) {
 
   const navigate = useNavigate();
 
-  const { mutate: mutateUser, isLoading: isLoadingUserMutation } = useMutation({
+  const { mutate: mutateUser } = useMutation({
     mutationFn: followUser,
     onSuccess: () => {
       toast.success("Followed User successfully");
@@ -87,14 +87,19 @@ function GridBlogItem({ blog }) {
     mutateUser(userData);
     setIsFollow(true);
   };
-  console.log(blog.author);
-  console.log(user?._id);
 
   let followText;
   if (blog?.author.followers.includes(user?._id)) {
     followText = true;
   } else {
     followText = false;
+  }
+
+  let showFollow;
+  if (user?._id === blog?.author?._id) {
+    showFollow = false;
+  } else {
+    showFollow = true;
   }
 
   return (
@@ -126,8 +131,14 @@ function GridBlogItem({ blog }) {
           </p>
         </div>
         <p onClick={handleFollowUser} className={styles.follow}>
-          {isFollow ? "Following" : followText ? "Following" : "Follow"}
-          {!isFollow && !followText && <Plus weight="bold" />}
+          {showFollow
+            ? isFollow
+              ? "Following"
+              : followText
+              ? "Following"
+              : "Follow"
+            : ""}
+          {showFollow ? !isFollow && !followText && <Plus weight="bold" /> : ""}
         </p>
       </div>
       <div className={styles.blofInfo}>

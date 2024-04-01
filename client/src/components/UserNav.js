@@ -1,6 +1,7 @@
 import styles from "./UserNav.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+// import { Bell } from "phosphor-react";
 
 function UserNav() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function UserNav() {
     <div className={styles.userNav}>
       {isAuthenticated ? (
         <>
+          {/* <Bell size={40} weight="bold" className={styles.notification} /> */}
           <div className={styles.photoContainer}>
             <img
               onClick={handleUserNavigate}
