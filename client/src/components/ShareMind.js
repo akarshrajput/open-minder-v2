@@ -94,17 +94,21 @@ function ShareMind() {
             <div className={styles.commonInput}>
               <label className={styles.label}>
                 Share your daily thoughts <Lightbulb weight="bold" />
-                <p className={styles.usernameText}>@{user?.username}</p>
+                <p className={styles.usernameText}>{user?.name}</p>
               </label>
               <textarea
                 className={styles.textarea}
                 rows={2}
                 placeholder={``}
                 {...register("content", {
-                  required: "Memory should have content",
+                  required: "Thought should have content",
                   maxLength: {
                     value: 100,
-                    message: "Memory must not have more than 100 characters",
+                    message: "Thought must not have more than 100 characters",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Thought must have more than 10 characters",
                   },
                 })}
               />

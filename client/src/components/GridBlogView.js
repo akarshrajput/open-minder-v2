@@ -1,11 +1,6 @@
 import styles from "./GridBlogView.module.css";
 import Loader from "./Loader";
-import {
-  ArrowElbowRightDown,
-  CircleWavyCheck,
-  Sparkle,
-  Plus,
-} from "phosphor-react";
+import { TrendUp, CircleWavyCheck, Sparkle, Plus } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getAllBlogsTrending } from "../services/apiBlogs";
@@ -29,12 +24,15 @@ function GridBlogView() {
         <Loader />
       ) : (
         <>
-          <Heading />
+          {/* <Heading /> */}
           <div className={styles.blogContainer}>
             {data?.data?.blogs.map((blog) => (
               <GridBlogItem blog={blog} key={blog.id} />
             ))}
           </div>
+          <p className={styles.seeMore}>
+            See more Trending <TrendUp weight="bold" />
+          </p>
         </>
       )}
     </>
@@ -43,14 +41,13 @@ function GridBlogView() {
 
 export default GridBlogView;
 
-function Heading() {
-  return (
-    <div className={styles.heading}>
-      <p>Trending on Open Minder </p>
-      <ArrowElbowRightDown size={20} weight="bold" />
-    </div>
-  );
-}
+// function Heading() {
+//   return (
+//     <div className={styles.heading}>
+//       <Fire weight="fill" size={18} color="#fd7e14" />
+//     </div>
+//   );
+// }
 
 function GridBlogItem({ blog }) {
   const { user, getCookie } = useAuth();

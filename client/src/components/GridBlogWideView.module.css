@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin: 0 2rem 0 2rem;
+  margin: 2rem 2rem 0 2rem;
 }
 .blogItem {
   padding: 1rem;
@@ -141,6 +141,17 @@
   background-color: #e7f5ff;
   padding: 0.2rem 0.8rem;
   border-radius: 2rem;
+}
+.seeMore {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #2b8a3e;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  width: fit-content;
 }
 
 @media (max-width: 1270px) {

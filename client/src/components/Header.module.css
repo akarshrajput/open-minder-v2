@@ -5,7 +5,8 @@
   left: 0rem;
   width: 100%;
   z-index: 1000;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background: none;
   transition: all 0.4s;
   /* border-bottom: 1px solid #0b68c5; */
 }

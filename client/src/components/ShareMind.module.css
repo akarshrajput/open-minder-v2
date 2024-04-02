@@ -105,7 +105,7 @@
   border: none;
   outline: none;
   padding: 0.6rem 2rem !important;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -120,7 +120,7 @@
   border: none;
   outline: none;
   padding: 0.6rem 2rem !important;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -133,7 +133,7 @@
 .writePaperAI {
   background: linear-gradient(to right bottom, #cc5de8, #845ef7);
   width: fit-content;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   padding: 0.6rem 2rem !important;
   border-radius: 0.6rem !important;
@@ -141,7 +141,7 @@
 .notes {
   background: linear-gradient(to right bottom, #fd7e14, #fab005);
   width: fit-content;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   padding: 0.6rem 2rem !important;
   border-radius: 0.6rem !important;
@@ -151,8 +151,9 @@
   color: #fa5252;
 }
 .usernameText {
-  color: #1971c2;
-  background-color: #e7f5ff;
+  color: #2b8a3e;
+  background-color: #f1f3f5;
+  /* border: 1px solid #dee2e6; */
   padding: 0.2rem 0.8rem;
   border-radius: 2rem;
   font-size: 1.2rem;

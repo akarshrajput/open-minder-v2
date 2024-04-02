@@ -32,14 +32,12 @@ function Memory({ memory }) {
   return (
     <div className={styles.memoryData}>
       <p className={styles.memoryContent}>{memory?.content}</p>
-      <div className={styles.memoryAuthor}>
-        <Bell weight="bold" />
-        <p> {memory.author.name}</p>
-        {/* {memory.author.verified ? (
-          <CircleWavyCheck weight="fill" color="#339af0" />
-        ) : (
-          ""
-        )} */}
+      <div className={styles.memoryAuthorCont}>
+        <p className={styles.reply}>Reply</p>
+        <div className={styles.memoryAuthor}>
+          <Bell weight="bold" />
+          <p> {memory.author.name}</p>
+        </div>
       </div>
     </div>
   );

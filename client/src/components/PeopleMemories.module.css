@@ -27,6 +27,10 @@
 .memoryContent {
   font-weight: 500;
 }
+.memoryAuthorCont {
+  display: flex;
+  justify-content: space-between;
+}
 .memoryAuthor {
   display: flex;
   align-items: center;
@@ -34,6 +38,14 @@
   font-size: 1.2rem;
   font-weight: 600;
   align-self: flex-end;
+}
+.reply {
+  font-weight: 500;
+  color: #2f9e44;
+  background-color: #ebfbee;
+  padding: 0.2rem 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
 }
 .authorPhoto {
   width: 2rem;

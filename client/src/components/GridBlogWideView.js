@@ -1,11 +1,6 @@
 import styles from "./GridBlogWideView.module.css";
 import Loader from "./Loader";
-import {
-  ArrowElbowRightDown,
-  CircleWavyCheck,
-  Sparkle,
-  Plus,
-} from "phosphor-react";
+import { CircleWavyCheck, Sparkle, Plus } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { getNewBlogs } from "./../services/apiBlogs";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -46,7 +41,7 @@ function GridBlogWideView() {
 
   return (
     <div className={styles.blogFlexContainer}>
-      <Heading />
+      {/* <Heading /> */}
       <div className={styles.blogContainer}>
         {blogs.map((blog) => (
           <GridBlogItem blog={blog} key={blog.id} navigate={navigate} />
@@ -60,14 +55,14 @@ function GridBlogWideView() {
   );
 }
 
-function Heading() {
-  return (
-    <div className={styles.heading}>
-      <p>New on Open Minder </p>
-      <ArrowElbowRightDown size={20} weight="bold" />
-    </div>
-  );
-}
+// function Heading() {
+//   return (
+//     <div className={styles.heading}>
+//       <p>New </p>
+//       <Rows size={18} weight="fill" color="#212529" />
+//     </div>
+//   );
+// }
 
 function GridBlogItem({ blog, navigate }) {
   const blogHeading = blog.heading.slice(0, 30) + " ...";
