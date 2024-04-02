@@ -1,3 +1,20 @@
 .exploreMore {
-  padding: 1rem;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.exploreList {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.exploreList li {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  border-radius: 0.6rem;
 }

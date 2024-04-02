@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import ShareMind from "../components/ShareMind";
 import Loader from "../components/Loader";
 import PeopleMemories from "../components/PeopleMemories";
+import ExploreMore from "../components/ExploreMore";
 
 function Overview() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -14,6 +15,7 @@ function Overview() {
     <div className="overview">
       <Header bg={isLoading ? "#fff" : isAuthenticated ? "#fff" : "#fcc419"} />
       {isLoading ? <Loader /> : isAuthenticated ? <ShareMind /> : <Hero />}
+      <ExploreMore />
       <PeopleMemories />
       <GridBlogView />
       <GridBlogWideView />
