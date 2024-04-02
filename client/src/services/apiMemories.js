@@ -1,6 +1,6 @@
 import axios from "axios";
-// const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://open-minder-v2-backend.up.railway.app";
+// const BASE_URL = "http://localhost:3000";
 
 export async function getAllMemories() {
   const { data, error } = await axios.get(
